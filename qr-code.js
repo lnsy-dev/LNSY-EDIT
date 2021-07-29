@@ -22,6 +22,13 @@ class QRCodeContainer extends HTMLElement {
     }
 
     const new_qr_code = this.qr_code_container = document.createElement('div')
+    this.style.backgroundColor = 'white'
+    this.style.contentFit = 'to-size'
+    this.style.padding = '1em'
+    this.style.display = 'inline-block'
+    this.style.width = 'fit-content'
+    this.style.height = 'fit-content'
+
     this.qr_code = new QRCode(this, {
       text: value,
       width: 512,

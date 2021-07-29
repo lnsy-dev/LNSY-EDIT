@@ -22,8 +22,6 @@ class PeerComponent extends HTMLElement {
       }
     })
 
-
-
     this.peer.on('connection', (conn) => {
       this.connection = conn
       console.log(this.connection)
