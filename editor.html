@@ -76,6 +76,12 @@
     max-width: 40em;
   }
 
+  peer-component {
+    width:  40em;
+    display: inline-block;
+    clear: both;
+  }
+
   .CodeMirror {
        width: 100% !important;
        height: 100% !important;
@@ -102,6 +108,7 @@
     <summary> </summary>
     <details id="devices">
       <summary>Devices</summary>
+      <button id="saveToPeer">Save to Devices</button>
       <button id="addPeer">+ Add Device</button>
       <script type="text/javascript">
         document.querySelector('#addPeer').addEventListener('click', function(e){
@@ -159,14 +166,21 @@
     }
   })
 
+  function saveToPeers(){
+    const encoded_value = b64.encode(editor.getValue())
+    ;[...document.querySelectorAll('peer-component')].forEach(peer => {
+      peer.update(encoded_value)
+    })
+  }
+
   document.addEventListener('keydown', function(e){
     if(e.ctrlKey && e.code === 'KeyS'){
       e.preventDefault()
-      const encoded_value = b64.encode(editor.getValue())
-      ;[...document.querySelectorAll('peer-component')].forEach(peer => {
-        peer.update(encoded_value)
-      })
     }
+  })
+
+  document.querySelector('#saveToPeer').addEventListener('click', function(e){
+    saveToPeers()
   })
 
 
