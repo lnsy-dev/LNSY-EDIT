@@ -73,6 +73,7 @@
   details {
     padding: 0.25em;
     background-color: rgba(0,0,0,0.8);
+    max-width: 40em;
   }
 
   .CodeMirror {
@@ -101,7 +102,7 @@
     <summary> </summary>
     <details id="devices">
       <summary>Devices</summary>
-      <button id="addPeer">+</button>
+      <button id="addPeer">+ Add Device</button>
       <script type="text/javascript">
         document.querySelector('#addPeer').addEventListener('click', function(e){
           const peer_component = document.createElement('peer-component')
@@ -110,7 +111,14 @@
       </script>
     </details>
     <details>
-      <summary>Settings</summary>
+      <summary>?</summary>
+      <h1>LNSY-EDIT</h1>
+      <h2>Distributed Quick Editor</h2>
+      <p>LNSY EDIT is a piece of software to quickly prototype distributed systems.</p>
+      <p>To add a new device, click the devices drop down. Click the add button. Either share the link or scan the QR Code. When the device is peered it will say.</p>
+      <p>Once you have peered a device every time you press CTRL-S the editors contents will be pushed to a div on each host device.</p>
+    
+      <p style="transform:scaleX(-1);">LNSY</p>
     </details>
   </details>
 </div>
@@ -128,7 +136,7 @@
        / _// // // /  / /
       /___/____/___/ /_/
 
-    Your distributed quick editor
+    Your distributed quick editor.
 -->
 
 <!DOCTYPE html>
