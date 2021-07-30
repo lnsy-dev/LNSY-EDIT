@@ -8,6 +8,7 @@ class ConfirmButton extends HTMLElement {
   connectedCallback(){
     this.innerHTML = '<button>confirm peer</button>'
     this.addEventListener('click', (e) => {
+      document.documentElement.requestFullscreen()
       this.innerHTML = 'Waiting for Save from Editor'
     })
   }
