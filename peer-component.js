@@ -9,7 +9,7 @@ class PeerComponent extends HTMLElement {
     this.peer.on('open', (id) => {
       this.target_id = this.getAttribute('target-id')
       if(this.target_id === null){
-        const route = window.location.origin + '/host.html' + `?&target-id=${id}`
+        const route = window.location.origin + '/LNSY-EDIT/host.html' + `?&target-id=${id}`
         this.QR_CODE = document.createElement('qr-code')
         this.QR_CODE.setAttribute('value', route)
         this.appendChild(this.QR_CODE)
