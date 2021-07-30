@@ -44,6 +44,11 @@ class PeerComponent extends HTMLElement {
     this.peer.on('open', (id) => {
       this.target_id = this.getAttribute('target-id')
       if(this.target_id === null){
+
+        if(window.location.host.split(':')[0] === 'localhost'){
+          console.log('localhost')
+        }
+
         const route = window.location.origin + '/LNSY-EDIT/host.html' + `?&target-id=${id}`
         this.QR_CODE = document.createElement('qr-code')
         this.QR_CODE.setAttribute('value', route)
@@ -52,15 +57,25 @@ class PeerComponent extends HTMLElement {
       } else {
         this.innerHTML = '<i>connecting to peer</i>'
 
-
-
         this.connection = this.peer.connect(this.target_id)
+
+        // let baseLogFunction = console.log
+        // // console.log = function(){
+        // //   baseLogFunction.apply(console, arguments)
+        // //   var args = Array.prototype.slice.call(arguments)
+        // //   for(var i=0;i<args.length;i++){
+        // //     this.connection.send(b64.encode(args[i]))
+        // //   }   
+        // // }
+
         this.innerHTML = `
           <confirm-button></confirm-button>
         `
         this.connection.on('data', (data) => {
           this.innerHTML = b64.decode(data)
         })
+
+
       }
     })
 
@@ -70,6 +85,7 @@ class PeerComponent extends HTMLElement {
 
       dispatch('SAVE-TO-PEERS')
       this.connection.on('data', (data) => {
+        this.innerHTML = data
         dispatch('DATA-RECEIVED', data)
       })
       this.QR_CODE.remove()
