@@ -11,7 +11,7 @@
 */
 
 //random gnar char generator
-export function getNewID() {
+function getNewID() {
   return 'dtrm-xxxxxxxxxxxxxxxx-'
     .replace(/[xy]/g, function(c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -19,7 +19,7 @@ export function getNewID() {
   }) + Date.now()
 }
 
-export function getValuesFromURL(URL = window.location.href ){
+function getValuesFromURL(URL = window.location.href ){
   const search_params = new URLSearchParams(URL)
   //?&otk=admin&usk=82e2c5ff-cfea-4d83-9860-de906a5143f4
   let options = {
@@ -37,11 +37,8 @@ export function getValuesFromURL(URL = window.location.href ){
   return options
 }
 
-export function parseCoord(coord){
-  return `${coord.x.toFixed(4)} ${coord.y.toFixed(4)} ${coord.z.toFixed(4)}`
-}
 
-export function getAndClearCookie(cname) {
+function getAndClearCookie(cname) {
   let name = cname + "="
   let decodedCookie = decodeURIComponent(document.cookie)
   let ca = decodedCookie.split(';')
@@ -96,7 +93,7 @@ String.prototype.interpolate = function(params) {
 
 */
 
-export function dispatch(name, detail = {}){
+function dispatch(name, detail = {}){
   const initialize_event = new CustomEvent(name, {detail: detail})
   document.dispatchEvent(initialize_event)
 }
@@ -131,7 +128,7 @@ const input_types = ["button",
   "url",
   "week"]
 
-export function createNewDiv(divopt){
+function createNewDiv(divopt){
   let div
   if(input_types.indexOf(divopt.type) > -1){
     div = document.createElement('input')
