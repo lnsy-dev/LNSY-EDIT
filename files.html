@@ -364,12 +364,6 @@ customElements.define('local-file', LocalFile)
 
   document.querySelector('#local-file-settings').addEventListener('UPDATED', async (e) => {
 
-    const file = document.querySelector('#selected-local-file').files[0]
-
-    let file_data = e.detail
-
-    file_data['local-file-parts'] = []
-
     const reader = new FileReader()
     reader.addEventListener('load', async function(){
 
@@ -383,6 +377,9 @@ customElements.define('local-file', LocalFile)
         if(typeof value === 'array'){value = value.join(',')}
         new_file.setAttribute(key, value)
       })
+
+      new_file.setAttribute('id', getNewID())
+      
 
       new_file.setAttribute('load', true)
       const local_key = file_data['local-file-key']
@@ -434,6 +431,14 @@ customElements.define('local-file', LocalFile)
       local_file_list.updateContent()
 
     })
+
+
+    const file = document.querySelector('#selected-local-file').files[0]
+
+    let file_data = e.detail
+
+    file_data['local-file-parts'] = []
+
 
     if(file){
       reader.readAsDataURL(file)
