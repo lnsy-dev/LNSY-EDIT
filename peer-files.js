@@ -1,9 +1,6 @@
 class PeerFiles extends HTMLElement {
   connectedCallback(){
-
-
-    const new_file_button = document.createElement('button')
-    new_file_button.addEventListener('click', () => this.createNewFile())
+    
     
   }
 
@@ -34,6 +31,9 @@ customElements.define('peer-files', PeerFiles)
 class PeerFile extends HTMLElement {
   connectedCallback(){
 
+  }
+
+  updateFileData(filedata){
 
   }
 
