@@ -7,7 +7,7 @@ class ConfirmButton extends HTMLElement {
   connectedCallback(){
     this.innerHTML = '<button>confirm peer</button>'
     this.addEventListener('click', (e) => {
-      document.documentElement.requestFullscreen()
+      // document.documentElement.requestFullscreen()
       this.innerHTML = 'Waiting for Save from Editor'
     })
   }
@@ -94,30 +94,6 @@ class PeerComponent extends HTMLElement {
 
   static get observedAttributes() {
     return [];
-  }
-
-  handleInputChange(){
-
-  }
-
-  handleTextAreaChange(){
-
-  }
-
-  handleCanvas(canvas){
-
-  }
-
-  handleImage(img){
-
-  }
-
-  handleVideo(video){
-
-  }
-
-  handleAudio(audio){
-
   }
 
   update(value){
