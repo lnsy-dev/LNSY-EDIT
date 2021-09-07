@@ -102,7 +102,7 @@ class LocalVariable extends HTMLElement {
     }
 
     this.source = this.getAttribute('source')
-    if(this.source === null){
+    if(this.source === null && this.querySelector('input') === null){
       this.initializeInput()
     } else {
       this.initializeOutput()
@@ -110,11 +110,16 @@ class LocalVariable extends HTMLElement {
   }
 
   initializeOutput(){
-    this.innerText = document.querySelector(`#${this.source}`).value
-    document.querySelector(`#${this.source}`)
-      .addEventListener('UPDATED', (e) => {
-        this.innerText = e.detail[this.source]
-    })
+    const source = document.querySelector(`#${this.source}`)
+    if(source !== null){
+      this.innerText = source.value
+      document.querySelector(`#${this.source}`)
+        .addEventListener('UPDATED', (e) => {
+          this.innerText = e.detail[this.source]
+      })  
+    } else {
+      setTimeout(()=>this.initializeOutput(),1000)
+    }
   }
 
   initializeInput(){
@@ -123,11 +128,11 @@ class LocalVariable extends HTMLElement {
     const url_vars = this.getValuesFromURL()
     const local_var_value = localStorage.getItem(this.id)
 
-    if(local_var_value !== null){
+    if(typeof(url_vars[this.id]) !== 'undefined'){
+        this.value = url_vars[this.id]
+    } else if(local_var_value !== null){
       this.value = local_var_value
-    } else if(typeof(url_vars[this.id]) !== 'undefined'){
-        this.value = url_vars.id
-    } else {
+    }  else {
       this.value = this.getAttribute('value')
       if(this.value === null){
         this.value = ''
@@ -304,21 +309,6 @@ class LocalFile extends HTMLElement {
       }
     }
 
-    const key = this.getAttribute('local-file-key')
-
-    if(document.querySelector('details') === null){
-      const menu = document.createElement('details')
-      menu.innerHTML = `
-        <button onclick="dispatch('DELETE', '${key}')">Delete</button>
-        <button onclick="dispatch('TOGGLE PREVIEW', '${key}')">Toggle Preview</button>
-
-      `
-      const summary = document.createElement('summary')
-      summary.innerHTML = ' '
-      menu.appendChild(summary)
-      this.prepend(menu)
-    }
-
   }
 
   static get observedAttributes() {
@@ -344,25 +334,29 @@ customElements.define('local-file', LocalFile)
   </script>
 </head>
 <body>
+  <details>
+    <summary>
+      Create New File
+    </summary>
 
-  <local-form id="local-file-settings">
-    <h1>Create new File Group</h1>
-    <local-variable id="local-file-key" placeholder="File Key" type="text"></local-variable>
-    <local-variable id="local-file-name" placeholder="Friendly Name" type="text"></local-variable>
-    <local-variable id="local-file-summary" placeholder="Summary" type="text"></local-variable>
-    <local-variable id="local-file-tags" placeholder="tags (comma separated)" type="text"></local-variable>
-    <label>Keep Local
-    <input type="checkbox" name="keep-local" id="keep-local" /> </label>
-        <br />
+    <local-form id="local-file-settings">
+      <local-variable id="local-file-key" placeholder="File Key" type="text"></local-variable>
+      <local-variable id="local-file-summary" placeholder="Summary" type="text"></local-variable>
+      <local-variable id="local-file-tags" placeholder="tags (comma separated)" type="text"></local-variable>
+      <label>Keep Local
+      <input type="checkbox" name="keep-local" id="keep-local" /> </label>
+          <br />
 
-    <input type="file" name="local-file" id="selected-local-file">
-    <br />
+      <input type="file" name="local-file" id="selected-local-file">
+      <br />
+    </local-form>
+  </details>
 
-  </local-form>
-
+  <details>
+    <summary>File List</summary>
   <local-html id="local-file-list">
-    <h1>File List</h1>
   </local-html>
+</details>
 
 
 <script type="text/javascript">
@@ -391,13 +385,48 @@ customElements.define('local-file', LocalFile)
       })
 
       new_file.setAttribute('load', true)
+      const local_key = file_data['local-file-key']
+
 
       new_file.innerHTML = `
-        <h1 id="name">${file_data['local-file-name']}</h1>
-        <div id="name">${file_data['local-file-key']}</div>
-        <div id="name">${file_data['local-file-summary']}</div>
-        <div id="name">${file_data['local-file-tags']}</div>
-        <div id="name">${file_data['local-file-parts']}</div>
+
+      <details>
+        <summary> </summary>
+        <button onclick="dispatch('DELETE', '${local_key}')">Delete</button>
+      
+        <local-variable id="${local_key}-file-key" 
+          value="${file_data['local-file-key']}" 
+          placeholder="file key" 
+          name="local file key"
+          type="text">
+        </local-variable>
+
+        <local-variable id="${local_key}-file-summary" 
+          value="${file_data['local-file-summary']}"
+          placeholder="Summary" 
+          name="summary"
+          type="text">
+        </local-variable>
+        <local-variable id="${local_key}-file-tags" 
+          value="${file_data['local-file-tags']}"
+          name="tags"
+          placeholder="tags (comma separated)" 
+          type="text">
+        </local-variable>
+
+      </details>
+
+      <div>
+        <h1 id="name">
+          <local-variable source="${local_key}-file-key">
+          </local-variable>
+        </h1>
+        <p>
+      <local-variable source="${local_key}-file-summary">
+      </local-variable> </p>
+      <p>
+      <local-variable source="${local_key}-file-tags"></local-variable></p>
+      </div>
 
       `
       const local_file_list = document.querySelector('#local-file-list')
@@ -411,15 +440,12 @@ customElements.define('local-file', LocalFile)
     }
   })
 
-  document.addEventListener('TOGGLE PREVIEW', (e) => {
-    console.log(e.detail)
+  document.addEventListener('DELETE', (e) => {
+    console.log(e)
+    // document.querySelector(`[local-file-key="${e.detail}"]`).remove()
+    // document.querySelector('#local-file-list').updateContent()
   })
 
-  document.addEventListener('DELETE', (e) => {
-    localforage.removeItem(e.detail)
-    document.querySelector(`[local-file-key="${e.detail}"]`).remove()
-    document.querySelector('#local-file-list').updateContent()
-  })
 </script>
 
 </body>
