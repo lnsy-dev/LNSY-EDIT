@@ -14,6 +14,8 @@
 
 <neo-query
 >
+<initial-query>
+MATCH (n) WHERE EXISTS(n.studies) RETURN DISTINCT "node" as entity, n.studies AS studies LIMIT 25 UNION ALL MATCH ()-[r]-() WHERE EXISTS(r.studies) RETURN DISTINCT "relationship" AS entity, r.studies AS studies LIMIT 25</initial-query>
  
 </neo-query>
 

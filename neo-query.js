@@ -2,6 +2,15 @@
 class NeoQuery extends HTMLElement {
 
   connectedCallback(){
+
+    setTimeout((e) => {
+      const initial_query = this.querySelector('initial-query')
+      if(initial_query !== null){
+        this.queryNeo(initial_query.innerText)
+        initial_query.remove()
+      }
+    },1000)
+
     // get the attribute called title, if it is null assign a new one
 
     this.secret_key = this.getAttribute('secret-key')
@@ -33,31 +42,49 @@ class NeoQuery extends HTMLElement {
       password: this.secret_key
     })
 
-    this.neoserver.onOpen = (metadata) => {
+    this.neoserver.onHandshake = (metadata) => {
       this.innerHTML = JSON.stringify(metadata)
     }
 
     this.neoserver.onInitFailure  = (err) => {
-      console.log(err)
+      this.neoserver.close()
     }
 
+    this.neoserver.onInit = (metadata) => {
+      console.log(metadata)
 
-    this.query = this.getAttribute('query')
-    if(this.query === null){
-      this.query = ''
-    } 
+      const initial_query = this.querySelector('initial-query')
+      if(initial_query !== null){
+        this.queryNeo(initial_query.innerText)
+        initial_query.remove()
+      }
 
-    this.query_parameters = this.getAttribute('query-parameters')
-    if(this.query_parameters === null){
-      this.query_parameters = {}
-    } 
 
+      this.query = this.getAttribute('query')
+      if(this.query === null){
+        this.query = ''
+      } 
+
+      this.query_parameters = this.getAttribute('query-parameters')
+      if(this.query_parameters === null){
+        this.query_parameters = {}
+      } 
+
+
+    }
+  }
+
+  queryNeo(query = this.query, params = this.query_parameters){
+    this.neoserver.run(
+      query,
+      params,
+      {onRecord: (record) => {this.handleRecord(record)}}
+      )
   }
 
   handleRecord(record){
-
+    this.innerHTML += `<li>${JSON.stringify(record)}</li>`
     dispatch('NEW QUERY RECORD RECEIVED', record)    
-    console.log(record)
   }
   
   static get observedAttributes() {
@@ -73,12 +100,7 @@ class NeoQuery extends HTMLElement {
     if(name  === 'query' || name === 'query-parameters'){
 
       this.query = new_value
-
-      this.neoserver.run(
-        new_value, 
-        this.query_parameters,
-        {onRecord: (record) => {this.handleRecord(record)}}
-        )
+      this.queryNeo()
     }
   }
 
