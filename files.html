@@ -301,6 +301,7 @@ class LocalFile extends HTMLElement {
 
       this.load = this.getAttribute('load')
       if(this.load !== null && this.load){
+        if(this.querySelector('img') !== null) return
         localforage.getItem(this.local_file).then(res => {
           const img = document.createElement('img')
           img.src = b64.decode(res)
