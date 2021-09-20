@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title>Neo4j Query Test</title>
 	<script src="js2neo.js"></script>
+	<script src="helpers.js"></script>
 
 	<script src="neo-query.js"></script>
 </head>
@@ -11,5 +12,34 @@
 
 
 
+<neo-query
+>
+ 
+</neo-query>
+
+
+<form id="query-neo">
+	<input type="text" name="query" placeholder="query">
+	<input type="submit" name="submit">
+</form>
+
+
+<ul id="query-results">
+
+</ul>
+
+<script>
+
+document.querySelector('#query-neo').addEventListener('submit', function(e){
+	e.preventDefault()
+	document.querySelector('neo-query').setAttribute('query', e.target.query.value)
+})	
+
+document.addEventListener('NEW QUERY RECORD RECEIVED', function(e){
+	document.querySelector('#query-results').innerHTML += `<li>${e.detail}</li>`
+})
+
+	
+</script>
 </body>
 </html>

@@ -41,8 +41,6 @@ class NeoQuery extends HTMLElement {
       console.log(err)
     }
 
-    this.innerHTML = 'LOADED'
-
 
     this.query = this.getAttribute('query')
     if(this.query === null){
@@ -57,7 +55,8 @@ class NeoQuery extends HTMLElement {
   }
 
   handleRecord(record){
-    this.innerHTML = JSON.stringify(record)
+
+    dispatch('NEW QUERY RECORD RECEIVED', record)    
     console.log(record)
   }
   
