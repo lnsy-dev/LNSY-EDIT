@@ -1,0 +1,276 @@
+
+  <script>
+
+    /*
+
+  LOCAL VARIABLE
+
+  This is a little input component.  
+
+*/
+
+
+class LocalVariable extends HTMLElement {
+
+
+  getValuesFromURL(URL = window.location.href ){
+    const search_params = new URLSearchParams(URL)
+    let options = {
+    }
+    for (const [key, unparsed_value] of search_params) {
+      if(key !== window.location.origin + window.location.pathname + '?' ){
+        try {
+          const value = JSON.parse(decodeURI(unparsed_value))
+          options[key] = value
+        } catch {
+          options[key] = decodeURI(unparsed_value)
+        }
+      }
+    }
+    return options
+  }
+
+
+  connectedCallback(){
+    this.id = this.getAttribute('id')
+    if(this.id === null){
+      this.id = getNewID()
+    }    
+    
+    this.name = this.getAttribute('name')
+    if(this.name === null){
+      this.name = this.id
+    }
+
+    this.source = this.getAttribute('source')
+    if(this.source === null && this.querySelector('input') === null){
+      this.initializeInput()
+    } else {
+      this.initializeOutput()
+    }
+  }
+
+  initializeOutput(){
+    const source = document.querySelector(`#${this.source}`)
+    if(source !== null){
+      this.innerText = source.value
+      document.querySelector(`#${this.source}`)
+        .addEventListener('UPDATED', (e) => {
+          this.innerText = e.detail[this.source]
+      })  
+    } else {
+      setTimeout(()=>this.initializeOutput(),1000)
+    }
+  }
+
+  initializeInput(){
+
+
+    const url_vars = this.getValuesFromURL()
+    const local_var_value = localStorage.getItem(this.id)
+
+    if(typeof(url_vars[this.id]) !== 'undefined'){
+        this.value = url_vars[this.id]
+    } else if(local_var_value !== null){
+      this.value = local_var_value
+    }  else {
+      this.value = this.getAttribute('value')
+      if(this.value === null){
+        this.value = ''
+      }
+    }
+
+    this.input = document.createElement('input')
+    this.input.setAttribute('value', this.value)
+    this.input.setAttribute('name', this.name)
+    this.input.addEventListener('keydown', (e) => {
+      if(e.key === "Enter" && !e.ctrlKey){
+        this.setAttribute('value', e.target.value)
+      }
+    })
+    
+    this.input.addEventListener('blur', (e) => {
+      this.setAttribute('value', e.target.value)
+    })
+
+    this.placeholder = this.getAttribute('placeholder')
+    if(this.placeholder !== null){
+      this.input.setAttribute('placeholder', this.placeholder)
+    } else {
+      this.input.setAttribute('placeholder', this.id)
+    }
+    this.appendChild(this.input)
+    const create_event = new CustomEvent('CREATED', {id:this.id})
+    this.dispatchEvent(create_event)
+  }
+  
+  static get observedAttributes() {
+    return ['value', 'id'];
+  }
+
+  update(new_value){
+    this.value = new_value
+    let detail = new Object()
+    detail[this.id] = this.value
+    localStorage.setItem(this.id, this.value)
+    const new_event = new CustomEvent('UPDATED', {detail})
+    this.dispatchEvent(new_event)
+  }
+
+  attributeChangedCallback(name, old_value, new_value){
+    if(name === 'value' && old_value !== new_value){
+      this.update(new_value)
+    }
+
+    if(name === 'id' && old_value !== new_value){
+      const delete_event = new CustomEvent('DELETED', {id:this.id})
+      this.dispatchEvent(delete_event)
+    }
+  }
+
+  disconnectedCallback() {
+    const delete_event = new CustomEvent('DELETED', {id:this.id})
+    this.dispatchEvent(delete_event)
+  }
+}
+
+/*
+  this component can be placed in the document using the notation
+  <custom-element title="element name here"></custom-element>
+  to change the name of the element in the dom, change the 
+  value in the quotation marks. 
+*/
+
+customElements.define('local-variable', LocalVariable)
+    
+    
+  class LocalForm extends HTMLElement {
+    connectedCallback(){
+
+      const submit_button = document.createElement('input')
+      submit_button.setAttribute('type', 'submit')
+      submit_button.setAttribute('name', 'submit')
+      setTimeout(() => {
+        this.appendChild(submit_button)
+      })
+      submit_button.addEventListener('click', (e) => {
+        e.preventDefault()
+        let form_values = {}
+        ;[...this.querySelectorAll('input')].forEach(input => {
+          form_values[input.name] = input.value
+        })
+
+        delete form_values["submit"]
+        const detail = form_values
+        const new_event = new CustomEvent('UPDATED', {detail})
+        this.dispatchEvent(new_event)
+      })
+
+      
+    }
+  
+    static get observedAttributes() {
+      return [];
+    }
+  
+    attributeChangedCallback(name, old_value, new_value){
+      switch(name){
+        default:
+      }
+    }
+  
+  }
+  
+  customElements.define('local-form', LocalForm)
+  
+
+
+  
+  
+  
+class LocalHTML extends HTMLElement {
+  connectedCallback(){
+    this.id = this.getAttribute('id')
+    if(this.id === null){
+      this.id = getNewID() 
+    }
+    localforage.getItem(this.id).then(content => {
+      if(content === null){
+        this.updateContent(content)
+      } else {
+        this.innerHTML = content
+      }
+    })
+  }
+
+  async updateContent(content = this.innerHTML){
+    this.innerHTML = content
+    ;await localforage.setItem(this.id, this.innerHTML)
+    const detail = content
+    const new_event = new CustomEvent('UPDATED', {detail})
+    this.dispatchEvent(new_event)
+
+  }
+
+
+  static get observedAttributes() {
+    return [];
+  }
+
+  attributeChangedCallback(name, old_value, new_value){
+    switch(name){
+      default:
+    }
+  }
+
+}
+
+customElements.define('local-html', LocalHTML)
+  
+  
+
+
+
+
+
+class LocalFile extends HTMLElement {
+  connectedCallback(){
+    this.local_file = this.getAttribute('local-file-parts')
+    if(this.local_file === null){
+      this.innerHTML = `<error>LOCAL FILES REQUIRE A LIST OF ALL PARTS</error>`
+    } else {
+
+      this.load = this.getAttribute('load')
+      if(this.load !== null && this.load){
+        if(this.querySelector('img') !== null) return
+        localforage.getItem(this.local_file).then(res => {
+          const img = document.createElement('img')
+          img.src = b64.decode(res)
+          this.appendChild(img)
+        })
+      }
+    }
+
+  }
+
+  static get observedAttributes() {
+    return [];
+  }
+
+  attributeChangedCallback(name, old_value, new_value){
+    switch(name){
+      default:
+    }
+  }
+
+}
+
+customElements.define('local-file', LocalFile)
+
+
+
+  
+  
+        
+
+  </script>

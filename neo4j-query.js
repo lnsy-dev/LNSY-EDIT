@@ -1,3 +1,6 @@
+import "https://cdn.rawgit.com/technige/js2neo/tree/v2"
+
+
 
 class NeoQuery extends HTMLElement {
 
