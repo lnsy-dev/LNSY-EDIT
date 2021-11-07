@@ -51,7 +51,7 @@ if(!PINBOARD_KEY){
 
 const pinboard = new Pinboard(PINBOARD_KEY);
 
-pinboard.get({ tag: 'lcms' }, (err, res) => {
+pinboard.all({  }, (err, res) => {
   console.log(res);
   //date: date,
   //user: 'user',
