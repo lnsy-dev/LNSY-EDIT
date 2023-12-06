@@ -146,7 +146,8 @@ class LNSYEdit extends HTMLElement {
     this.download_link.innerText = 'Download';
     this.download_link.classList.add('button');
     this.download_link.href = dataUrl;
-    this.download_link.download = `${this.id}.md`;
+    let file_name = `${this.id}-${Date.now()}`;
+    this.download_link.download = `${file_name}.md`;
 
   }
 
