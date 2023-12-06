@@ -1,1 +1,2 @@
-import  "./custom-html-element.js";
+import "./json-editor.js";
+import "./lnsy-edit.js";

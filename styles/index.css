@@ -1,9 +1,9 @@
 @import "./reset.css";
 @import "./variables.css";
+@import "./json-editor.css";
+@import "./lnsy-edit.css";
 
 body {
   background-color: var(--bg-color);
   color: var(--fg-color);
-  font-family: monospace;
-  text-align: center;
 }

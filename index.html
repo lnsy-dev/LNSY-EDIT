@@ -14,21 +14,20 @@
   <meta property="og:image" content="./assets/splash.jpg">
   <meta property="og:url" content="https://example.com"> <!-- Replace with your actual URL -->
 
-  <title>Vanilla JS / CSS boilerplate</title>
+  <title>LNSY EDIT</title>
   <link rel="stylesheet" type="text/css" href="./styles/index.css">
   <script src="./src/index.js" type="module"></script>
 </head>
 <body>
+  <lnsy-edit></lnsy-edit>
 
-  <img src="./assets/splash.jpg" alt="Boilerplate Image" style="margin:auto; width:40em; height:auto;">
-
-  <h1>Vanilla JS / CSS boilerplate</h1>
-  <h2>By <a href="https://lnsy.dev/" rel="author">LNSY</a></h2>
-  <custom-html-element></custom-html-element>
-
-  <p>For generating JS and CSS libraries in plain CSS, JS, and HTML.</p>
-
-  <p>For more information, see the README</p>
+  <script>
+    [...document.querySelectorAll('lnsy-edit')].forEach(editor => {
+      editor.addEventListener('save', (e) => {
+        console.log(e)
+      })
+    })
+  </script>
 
 </body>
 </html>
