@@ -11,11 +11,15 @@ lnsy-edit {
   padding-bottom: 1em;
 }
 
-lnsy-edit button {
-  box-sizing: border-box;
+lnsy-edit button, lnsy-edit .button {
   border: var(--editor-border);
   background-color: transparent;
   color: var(--fg-color);
+  margin: 0 1em 0 0;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-size: 10pt;
 }
 
 

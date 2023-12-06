@@ -57,6 +57,16 @@ class LNSYEdit extends HTMLElement {
     });
     details.appendChild(save_button);
 
+    this.download_link = document.createElement('a');
+    this.download_link.setAttribute('download', true);
+    details.appendChild(this.download_link);
+
+
+    this.id = this.getAttribute('id'); 
+    if (this.id === null) {
+      this.id = crypto.randomUUID();
+    }
+
     const load_file = document.createElement('input');
     load_file.setAttribute('type', 'file');
     load_file.setAttribute('accept', '.md');
@@ -130,6 +140,14 @@ class LNSYEdit extends HTMLElement {
       }
     });
     this.dispatchEvent(save_event);
+    const blob = new Blob([markdown_content], { type: 'text/plain' });
+    const dataUrl = URL.createObjectURL(blob);
+
+    this.download_link.innerText = 'Download';
+    this.download_link.classList.add('button');
+    this.download_link.href = dataUrl;
+    this.download_link.download = `${this.id}.md`;
+
   }
 
   loadData(content, metadata){
