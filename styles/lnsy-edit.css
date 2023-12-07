@@ -9,6 +9,10 @@ lnsy-edit {
   border: 1px solid grey;
 }
 
+lnsy-edit summary {
+  padding-left: 0.25em;
+}
+
 
 lnsy-edit button, lnsy-edit .button {
   border: var(--editor-border);

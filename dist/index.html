@@ -11,7 +11,7 @@
       flex: 1;
       font-family: var(--editor-font);
       padding: 1em;
-    }</style></head><body><lnsy-edit id="lnsy_edit"></lnsy-edit><div id="result_div"></div><script>lnsy_edit.addEventListener('save', (e) => {
+    }</style></head><body><lnsy-edit></lnsy-edit><div id="result_div"></div><script>document.querySelector('lnsy-edit').addEventListener('save', (e) => {
       result_div.innerHTML = ' '; 
       const markdown = document.createElement('mark-down');
       markdown.innerHTML = e.detail.content;

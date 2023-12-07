@@ -177,10 +177,16 @@ class LNSYEdit extends HTMLElement {
   }
 
   loadData(content, metadata){
-    if(metadata.file_id){
+    if(metadata["file-id"]){
       this.setAttribute('file-id', metadata["file-id"]);
     } else {
       metadata["file-id"] = this.getAttribute('file-id');
+    }
+
+    if(metadata["file-created"]){
+      this.setAttribute('file-created', metadata["file-created"])
+    } else {
+      metadata["file-created"] = new Date().toISOString();
     }
     this.json_editor.updateData(metadata);
     this.editor.setValue(content);
