@@ -6,7 +6,6 @@ json-editor {
   background-color: black;
   display:block;
   border-bottom: 1px solid grey;
-  width: 100%;
   --jse-theme-color: var(--bg-color);
   --jse-button-primary-background-highlight: var(--bg-color);
   --jse-button-primary-background: var(--bg-color);

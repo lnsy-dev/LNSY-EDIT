@@ -9,22 +9,36 @@ lnsy-edit {
   border: 1px solid grey;
 }
 
+
 lnsy-edit button, lnsy-edit .button {
   border: var(--editor-border);
   background-color: transparent;
   color: var(--fg-color);
-  margin: 0 1em 0 0;
+  margin: 0 0 0 0;
   padding: 0.25em 0.5em;
   text-decoration: none;
   box-sizing: border-box;
   font-size: 10pt;
+  cursor: pointer;
+}
+
+lnsy-edit button[disabled="true"]{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+lnsy-edit input[type="file"] {
+  display: none;
+}
+
+lnsy-edit button-bar {
+  padding-left: 0.25em;
 }
 
 
 lnsy-edit details {
   width: 100%;
   display: block;
-  padding-left:1em;
   
 }
 

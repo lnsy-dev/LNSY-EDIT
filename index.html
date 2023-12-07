@@ -36,11 +36,11 @@
   </style>
 </head>
 <body>
-  <lnsy-edit id="lnsy_edit"></lnsy-edit>
+  <lnsy-edit></lnsy-edit>
 
   <div id="result_div"></div>
   <script>
-    lnsy_edit.addEventListener('save', (e) => {
+    document.querySelector('lnsy-edit').addEventListener('save', (e) => {
       result_div.innerHTML = ' '; 
       const markdown = document.createElement('mark-down');
       markdown.innerHTML = e.detail.content;

@@ -14,12 +14,6 @@ import { JSONEditor } from './vanilla-json-editor.js'
 // Use updateProps to update properties.
 
 class jsonEditorComponent extends HTMLElement {
-  constructor() {
-    super();
-    // element created
-    // 
-  }
-
   connectedCallback(){
     // browser calls this method when the element is added to the document
     // (can be called many times if an element is repeatedly added/removed)
@@ -43,18 +37,6 @@ class jsonEditorComponent extends HTMLElement {
       target: this,
       props: {
         content: {json: this.content},
-        onChange: (updatedContent, previousContent, { contentErrors, patchResult }) => {
-          // content is an object { json: JSONValue } | { text: string }
-          // console.log('onChange', { updatedContent, previousContent, contentErrors, patchResult })
-          this.content = updatedContent;
-          const save_event = new CustomEvent('save', {
-            detail: {
-              content: this.content,
-              timestamp: new Date().toISOString()
-            }
-          });
-          this.dispatchEvent(save_event);
-        }
       }
     });
   }
@@ -72,7 +54,6 @@ class jsonEditorComponent extends HTMLElement {
 
   upsertData(obj){
     const previous = this.editor.get().json;
-    console.log(previous);
     const new_value = Object.assign(previous, obj);
     this.editor.set({
       json: new_value

@@ -50,22 +50,30 @@ class LNSYEdit extends HTMLElement {
   connectedCallback(){
     const details = document.createElement('details');
     details.innerHTML = `<summary></summary>`; 
+    details.setAttribute('open', true);
+
+    const button_bar = document.createElement('button-bar');
     const save_button = document.createElement('button');
     save_button.innerText = 'save';
     save_button.addEventListener('click', (e) => {
       this.saveData();
     });
-    details.appendChild(save_button);
-
+    button_bar.appendChild(save_button);
+    
+    this.download_button = document.createElement('button');
+    this.download_button.setAttribute('disabled', 'true');
+    this.download_button.innerText = 'download'
     this.download_link = document.createElement('a');
     this.download_link.setAttribute('download', true);
-    details.appendChild(this.download_link);
+    this.download_button.addEventListener('click', (e) => {
+      this.download_link.click();
+    });
+    button_bar.appendChild(this.download_button);
+    button_bar.appendChild(this.download_link);
 
 
-    this.id = this.getAttribute('id'); 
-    if (this.id === null) {
-      this.id = crypto.randomUUID();
-    }
+    const load_file_container = document.createElement('button');
+    load_file_container.innerText = 'load'
 
     const load_file = document.createElement('input');
     load_file.setAttribute('type', 'file');
@@ -80,7 +88,13 @@ class LNSYEdit extends HTMLElement {
         reader.readAsText(file);
       }
     });
-    details.appendChild(load_file);
+    load_file_container.addEventListener('click', (e) => {
+      load_file.click();
+    });
+    load_file_container.appendChild(load_file)
+    button_bar.appendChild(load_file_container);
+
+    details.appendChild(button_bar);
 
     this.json_editor = document.createElement('json-editor');
     details.appendChild(this.json_editor);
@@ -124,10 +138,22 @@ class LNSYEdit extends HTMLElement {
       content = ''
     } 
 
+    this.file_id = this.getAttribute('file-id'); 
+    if (this.file_id === null) {
+      this.file_id = crypto.randomUUID();
+      this.setAttribute('file-id', this.file_id);
+    }
+
     this.loadData(content, metadata);
   }
 
   saveData(){
+
+    this.json_editor.upsertData({
+      "last-updated": new Date().toISOString()
+    });
+
+
     const json_data = this.json_editor.getData();
     const editor_content = this.editor.getValue();
     const markdown_content = this.getMarkdown();
@@ -143,23 +169,37 @@ class LNSYEdit extends HTMLElement {
     const blob = new Blob([markdown_content], { type: 'text/plain' });
     const dataUrl = URL.createObjectURL(blob);
 
-    this.download_link.innerText = 'Download';
-    this.download_link.classList.add('button');
     this.download_link.href = dataUrl;
-    let file_name = `${this.id}-${Date.now()}`;
+    this.download_button.setAttribute('disabled', false);
+    let file_name =  json_data["file-id"];
     this.download_link.download = `${file_name}.md`;
 
   }
 
   loadData(content, metadata){
+    if(metadata.file_id){
+      this.setAttribute('file-id', metadata["file-id"]);
+    } else {
+      metadata["file-id"] = this.getAttribute('file-id');
+    }
     this.json_editor.updateData(metadata);
     this.editor.setValue(content);
   }
 
   loadMarkdown(markdown){
-    const json = parseJSONFrontmatter(markdown);
+    const metadata = parseJSONFrontmatter(markdown);
+    if(metadata["file-id"]){
+      this.setAttribute('file-id', metadata["file-id"]);
+    } else {
+      metadata["file-id"] = this.getAttribute('file-id');
+    }
+
+    Object.keys(metadata).forEach(key => {
+      this.setAttribute(key, metadata[key]);
+    });
+
     const content = removeFrontMatter(markdown);
-    this.json_editor.updateData(json);
+    this.json_editor.updateData(metadata);
     this.editor.setValue(content);
   }
 
