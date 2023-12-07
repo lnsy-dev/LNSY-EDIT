@@ -1,13 +1,10 @@
-import 'https://cdn.jsdelivr.net/npm/codemirror@5.62.2/lib/codemirror.js'
-
-document.head.insertAdjacentHTML( 'beforeend', `<link rel=stylesheet href="https://cdn.jsdelivr.net/npm/codemirror@5.62.2/lib/codemirror.css" >` );
-
-import 'https://cdn.jsdelivr.net/npm/codemirror@5.62.2/mode/javascript/javascript.js'
-import 'https://cdn.jsdelivr.net/npm/codemirror@5.62.2/mode/css/css.js'
-import 'https://cdn.jsdelivr.net/npm/codemirror@5.62.2/mode/xml/xml.js'
-import 'https://cdn.jsdelivr.net/npm/codemirror@5.62.2/mode/htmlmixed/htmlmixed.js'
-import 'https://cdn.jsdelivr.net/npm/codemirror@5.62.2/mode/markdown/markdown.js'
-import 'https://cdn.jsdelivr.net/npm/codemirror@5.62.2/addon/edit/closetag.js'
+import './vendor/codemirror.js';
+import './vendor/javascript.js';
+import './vendor/css.js';
+import './vendor/xml.js'
+import './vendor/htmlmixed.js'
+import './vendor/markdown.js'
+import './vendor/closetag.js'
 
 function parseJSONFrontmatter(markdownContent) {
   // Regular expression to match YAML or JSON frontmatter
