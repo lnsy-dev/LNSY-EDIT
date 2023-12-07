@@ -7,8 +7,6 @@ lnsy-edit {
   font-family: var(--editor-font);
   display:block;
   border: 1px solid grey;
-  margin: 1em;
-  padding-bottom: 1em;
 }
 
 lnsy-edit button, lnsy-edit .button {

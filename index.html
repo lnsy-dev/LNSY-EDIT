@@ -17,17 +17,36 @@
   <title>LNSY EDIT</title>
   <link rel="stylesheet" type="text/css" href="./styles/index.css">
   <script src="./src/index.js" type="module"></script>
+  <script type="module" src="https://lnsy-dev.github.io/markdown-component/dist/mark-down-component.min.js"></script>
+  <style>
+    body {
+      display: flex;
+    }
+
+    lnsy-edit {
+      flex: 1;
+      height: 100%;
+    }
+
+    #result_div {
+      flex: 1;
+      font-family: var(--editor-font);
+      padding: 1em;
+    }
+  </style>
 </head>
 <body>
-  <lnsy-edit id="lnsy-edit"></lnsy-edit>
+  <lnsy-edit id="lnsy_edit"></lnsy-edit>
 
+  <div id="result_div"></div>
   <script>
-
-    [...document.querySelectorAll('lnsy-edit')].forEach(editor => {
-      editor.addEventListener('save', (e) => {
-        console.log(e)
-      })
-    })
+    lnsy_edit.addEventListener('save', (e) => {
+      result_div.innerHTML = ' '; 
+      const markdown = document.createElement('mark-down');
+      markdown.innerHTML = e.detail.content;
+      result_div.appendChild(markdown);
+    });
+    
   </script>
 
 </body>
