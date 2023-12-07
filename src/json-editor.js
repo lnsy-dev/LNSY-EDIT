@@ -8,7 +8,7 @@
 */
 
 
-import { JSONEditor } from '//cdn.jsdelivr.net/npm/vanilla-jsoneditor/index.js'
+import { JSONEditor } from './vanilla-json-editor.js'
 
 // use methods get, set, update, and onChange to get data in or out of the editor.
 // Use updateProps to update properties.
