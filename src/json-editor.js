@@ -70,6 +70,15 @@ class jsonEditorComponent extends HTMLElement {
     this.editor.set(content);
   }
 
+  upsertData(obj){
+    const previous = this.editor.get().json;
+    console.log(previous);
+    const new_value = Object.assign(previous, obj);
+    this.editor.set({
+      json: new_value
+    });
+  }
+
   static get observedAttributes() {
     return ['values'];
   }
