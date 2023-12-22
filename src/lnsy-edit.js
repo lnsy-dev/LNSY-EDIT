@@ -65,8 +65,8 @@ class LNSYEdit extends HTMLElement {
     this.download_button.addEventListener('click', (e) => {
       this.download_link.click();
     });
+    this.download_button.appendChild(this.download_link);
     button_bar.appendChild(this.download_button);
-    button_bar.appendChild(this.download_link);
 
 
     const load_file_container = document.createElement('button');
@@ -116,7 +116,7 @@ class LNSYEdit extends HTMLElement {
     });
 
     /* Detect Save Key */
-    window.addEventListener('keydown', (e) =>{
+    this.addEventListener('keydown', (e) =>{
       if(e.ctrlKey && e.code === 'KeyS'){
         e.preventDefault();
         this.saveData();
@@ -145,11 +145,9 @@ class LNSYEdit extends HTMLElement {
   }
 
   saveData(){
-
     this.json_editor.upsertData({
       "last-updated": new Date().toISOString()
     });
-
 
     const json_data = this.json_editor.getData();
     const editor_content = this.editor.getValue();
@@ -170,7 +168,6 @@ class LNSYEdit extends HTMLElement {
     this.download_button.setAttribute('disabled', false);
     let file_name =  json_data["file-id"];
     this.download_link.download = `${file_name}.md`;
-
   }
 
   loadData(content, metadata){
