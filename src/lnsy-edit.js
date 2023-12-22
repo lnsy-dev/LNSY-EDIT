@@ -63,9 +63,10 @@ class LNSYEdit extends HTMLElement {
     this.download_link = document.createElement('a');
     this.download_link.setAttribute('download', true);
     this.download_button.addEventListener('click', (e) => {
+      console.log('CLICKED');
       this.download_link.click();
     });
-    this.download_button.appendChild(this.download_link);
+    button_bar.appendChild(this.download_link);
     button_bar.appendChild(this.download_button);
 
 
@@ -165,7 +166,7 @@ class LNSYEdit extends HTMLElement {
     const dataUrl = URL.createObjectURL(blob);
 
     this.download_link.href = dataUrl;
-    this.download_button.setAttribute('disabled', false);
+    this.download_button.removeAttribute('disabled');
     let file_name =  json_data["file-id"];
     this.download_link.download = `${file_name}.md`;
   }
