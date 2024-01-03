@@ -1,4 +1,5 @@
 @import "./vendor/codemirror.css";
+
 /*
 lnsyEdit
 lnsy-edit
@@ -48,6 +49,38 @@ lnsy-edit details {
 
 .CodeMirror-sizer {
 padding: 1em;
+}
+
+
+/* Apply the font to specific elements or globally */
+body {
+  font-family: 'AtkinsonHyperlegible-Regular', sans-serif;
+}
+
+/* You can use the fonts for specific elements like headings or paragraphs */
+h1 {
+  font-family: 'AtkinsonHyperlegible-Bold', sans-serif;
+}
+
+p {
+  font-family: 'AtkinsonHyperlegible-Regular', sans-serif;
+}
+
+/* Apply italic style */
+em {
+  font-family: 'AtkinsonHyperlegible-Italic', sans-serif;
+  font-style: italic;
+}
+
+summary {
+  font-size: 72%;
+  cursor:pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently
 }
 
 .noselect {

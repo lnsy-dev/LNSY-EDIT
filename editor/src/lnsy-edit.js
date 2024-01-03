@@ -46,7 +46,7 @@ function removeFrontMatter(content) {
 class LNSYEdit extends HTMLElement {
   connectedCallback(){
     const details = document.createElement('details');
-    details.innerHTML = `<summary></summary>`; 
+    details.innerHTML = `<summary><b>LNSY EDIT</b></summary>`; 
     details.setAttribute('open', true);
     details.classList.add('no-select');
 
@@ -169,7 +169,7 @@ class LNSYEdit extends HTMLElement {
     this.download_link.href = dataUrl;
     this.download_button.removeAttribute('disabled');
     let file_name =  json_data["file-id"];
-    this.download_link.download = `${file_name}.md`;
+    this.download_link.download = `${file_name}`;
   }
 
   loadData(content, metadata){
