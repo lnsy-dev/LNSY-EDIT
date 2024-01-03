@@ -50,6 +50,17 @@ lnsy-edit details {
 padding: 1em;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+
 /*
   Name:   lnsy-edit
   Author: by LNSY, adapted from DuoTone themes by Simurai (http://simurai.com/projects/2016/01/01/duotone-themes)
@@ -57,7 +68,7 @@ padding: 1em;
   CodeMirror template by Jan T. Sott (https://github.com/idleberg), adapted by Bram de Haan (https://github.com/atelierbram/)
 */
 
-.cm-s-lnsy-edit.CodeMirror { background: #000; color: #fff; }
+.cm-s-lnsy-edit.CodeMirror { background: #000; color: #fff; margin-bottom: 1em;}
 .cm-s-lnsy-edit div.CodeMirror-selected { background: #545167!important; }
 .cm-s-lnsy-edit .CodeMirror-gutters { background: #2a2734; border-right: 0px; }
 .cm-s-lnsy-edit .CodeMirror-linenumber { color: #545167; }

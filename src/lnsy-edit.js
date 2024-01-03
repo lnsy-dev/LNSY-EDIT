@@ -48,6 +48,7 @@ class LNSYEdit extends HTMLElement {
     const details = document.createElement('details');
     details.innerHTML = `<summary></summary>`; 
     details.setAttribute('open', true);
+    details.classList.add('no-select');
 
     const button_bar = document.createElement('button-bar');
     const save_button = document.createElement('button');
