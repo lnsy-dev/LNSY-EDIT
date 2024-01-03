@@ -52,7 +52,7 @@ class LNSYEdit extends HTMLElement {
 
     const button_bar = document.createElement('button-bar');
     const save_button = document.createElement('button');
-    save_button.innerText = 'save';
+    save_button.innerText = 'build';
     save_button.addEventListener('click', (e) => {
       this.saveData();
     });
@@ -60,11 +60,10 @@ class LNSYEdit extends HTMLElement {
     
     this.download_button = document.createElement('button');
     this.download_button.setAttribute('disabled', 'true');
-    this.download_button.innerText = 'download'
+    this.download_button.innerText = 'download markdown'
     this.download_link = document.createElement('a');
     this.download_link.setAttribute('download', true);
     this.download_button.addEventListener('click', (e) => {
-      console.log('CLICKED');
       this.download_link.click();
     });
     button_bar.appendChild(this.download_link);
@@ -72,11 +71,11 @@ class LNSYEdit extends HTMLElement {
 
 
     const load_file_container = document.createElement('button');
-    load_file_container.innerText = 'load'
+    load_file_container.innerText = 'load from disk'
 
     const load_file = document.createElement('input');
     load_file.setAttribute('type', 'file');
-    load_file.setAttribute('accept', '.md');
+    load_file.setAttribute('accept', '.md, .txt');
     load_file.addEventListener('change', (e) => {
      const file = e.target.files[0];
       if (file) {
@@ -114,16 +113,21 @@ class LNSYEdit extends HTMLElement {
       Tab: function(cm) {
         var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
         cm.replaceSelection(spaces);
-      }
+      },
+      'Ctrl-P': () => {        
+        this.dispatchEvent(new CustomEvent('control-panel',{
+          detail:{
+            cursor: this.editor.getCursor()
+          }
+        }))
+        return true
+      },
+      'Ctrl-S': () => {
+        this.saveData();
+        return true
+      } 
     });
 
-    /* Detect Save Key */
-    this.addEventListener('keydown', (e) =>{
-      if(e.ctrlKey && e.code === 'KeyS'){
-        e.preventDefault();
-        this.saveData();
-      }
-    });
 
     let metadata = this.getAttribute('metadata');
     if(metadata === null){
@@ -137,13 +141,35 @@ class LNSYEdit extends HTMLElement {
       content = ''
     } 
 
-    this.file_id = this.getAttribute('file-id'); 
-    if (this.file_id === null) {
-      this.file_id = crypto.randomUUID();
+    this.file_id = localStorage.getItem('last-file');
+    if(this.file_id !== null){
+      this.loadLocalData(this.file_id);
+    } else {
+      this.file_id = crypto.randomUUID() + '.md';
       this.setAttribute('file-id', this.file_id);
     }
 
-    this.loadData(content, metadata);
+    this.editor.on("change", () => {
+      this.saveLocalData();
+    });
+
+    this.json_editor.addEventListener('json-updated', (e)=>{
+      this.saveLocalData();
+    })
+  }
+
+  loadLocalData(file_id){
+    const markdown = localStorage.getItem(file_id);
+    this.loadMarkdown(markdown);
+  }
+
+  saveLocalData(){
+    const json_data = this.json_editor.getData();
+    const file_id = json_data["file-id"];
+    localStorage.setItem('last-file', file_id);
+    const markdown_content = this.getMarkdown();
+    localStorage.setItem(file_id, markdown_content);
+
   }
 
   saveData(){
@@ -162,6 +188,8 @@ class LNSYEdit extends HTMLElement {
         timestamp: new Date().toISOString()
       }
     });
+
+    this.saveLocalData();
     this.dispatchEvent(save_event);
     const blob = new Blob([markdown_content], { type: 'text/plain' });
     const dataUrl = URL.createObjectURL(blob);

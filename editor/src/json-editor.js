@@ -37,6 +37,10 @@ class jsonEditorComponent extends HTMLElement {
       target: this,
       props: {
         content: {json: this.content},
+        onChange: () => {
+          const event = new CustomEvent('json-updated');
+          this.dispatchEvent(event);
+        }
       }
     });
   }
