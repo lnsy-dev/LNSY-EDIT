@@ -12,7 +12,7 @@ class LNSYEdit extends HTMLElement {
     this.textarea = document.createElement('textarea')
     this.appendChild(this.textarea)
     this.editor = CodeMirror.fromTextArea(this.textarea, {
-      lineNumbers:true,
+      lineNumbers:false,
       mode:'markdown',
       theme:'lnsy-edit',
       autoCloseTags:true,

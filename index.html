@@ -26,6 +26,12 @@
       }
     }
 
+    md-editor {
+      display: block;
+      height: calc(100vh - 10em);
+      padding-bottom: 1em;
+    }
+
     main {
       padding-top: 2em;
       width: 40em;
@@ -68,8 +74,9 @@
   </details>
   <main>
 
-  <json-editor id="json_editor"></json-editor>
   <md-editor id="md_editor"></md-editor>
+  <json-editor id="json_editor"></json-editor>
+
   <dialog id="control_panel_modal">
     <button id="modal_close_button">x</button>
     <input autofocus type="string" id="control_panel">
