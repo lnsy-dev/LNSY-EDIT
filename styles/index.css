@@ -8,3 +8,29 @@ body {
   color: var(--fg-color);
   font-family: var(--font-family);
 }
+
+input {
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+  font-family: var(--font-family);
+  border: 1px solid grey;
+}
+
+button {
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+  font-family: var(--font-family);
+  border: 1px solid grey;
+
+}
+
+dialog {
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+  font-family: var(--font-family);
+  border: 1px solid grey;
+}
+
+dialog::backdrop {
+  background-color: rgba(0,0,0,0.7);
+}

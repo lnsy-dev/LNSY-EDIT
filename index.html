@@ -51,15 +51,14 @@
   <dialog id="control_panel_modal">
     <button id="modal_close_button">x</button>
     <input autofocus type="search" id="control_panel">
+    <control-panel-results></control-panel-results>
   </dialog>
   <script>
     md_editor.addEventListener('BUFFER-CHANGED', (e) => {
-      console.log(e.detail);
       // const {last_line, buffer} = e.detail;
     });
 
     json_editor.addEventListener('json-updated', (e) => {
-      console.log(e.detail);
     })
 
     let control_panel_open = false;
@@ -72,8 +71,9 @@
     document.addEventListener('keydown', (e) => {
       if(e.code === 'KeyP' && e.ctrlKey === true){
         control_panel_open = true;
+        control_panel_modal.showModal();
         control_panel.focus();
-        control_panel_modal.setAttribute('open', true);
+
       }
 
       if(control_panel_open && e.code === 'Escape'){
@@ -84,6 +84,7 @@
 
 
   </script>
+
 </main>
 
 </body>
