@@ -33,6 +33,28 @@
       border-right: 1px solid grey;
       min-height: 100vh;
     }
+
+    #modal_close_button {
+      position: absolute;
+      right: 0pt;
+      top: 0pt;
+      border:none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+
+    dialog {
+      padding: 0;
+    }
+
+    #control_panel {
+      margin: 0;
+      padding: 1em;
+      width: 100%;
+      display: block;
+      height: 2em;
+      font-size: 200%;
+    }
   </style>
 </head>
 <body>
@@ -50,7 +72,7 @@
   <md-editor id="md_editor"></md-editor>
   <dialog id="control_panel_modal">
     <button id="modal_close_button">x</button>
-    <input autofocus type="search" id="control_panel">
+    <input autofocus type="string" id="control_panel">
     <control-panel-results></control-panel-results>
   </dialog>
   <script>
