@@ -16,19 +16,30 @@ class ControlPanelResults extends HTMLElement {
     this.results = document.createElement('ul');
     this.appendChild(this.results)
     control_panel.addEventListener('keyup', (e) => {
-      console.log(e.target.value);
       this.handleInputChange(e.target.value);
     });
   }
 
   handleInputChange(new_input){
-    console.log(new_input.length)
+
+    const handleArrowKeys = (e) =>{
+      if(e.code === 'ArrowDown'){
+        console.log('down');
+      } else if(e.code === 'ArrowUp'){
+        console.log('up');
+      } else {
+        return
+      }
+    }
+
     if(new_input.length > 1){
       this.results.innerHTML = control_panel_results.map(result => {
         return `<li>${result.name}, ${result.object}</li>`;
       }).join("");
       this.style.display = 'block';
+      document.addEventListener('keydown', handleArrowKeys);
     } else {
+      document.removeEventListener('keydown', handleArrowKeys)
       this.style.display = 'none';
     }
 

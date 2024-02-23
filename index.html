@@ -95,11 +95,11 @@
         control_panel_open = true;
         control_panel_modal.showModal();
         control_panel.focus();
-
       }
 
       if(control_panel_open && e.code === 'Escape'){
         control_panel_open = false;
+        control_panel.value = "";
         control_panel_modal.close();
       }
     });
