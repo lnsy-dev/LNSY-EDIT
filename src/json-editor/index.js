@@ -18,16 +18,8 @@ class jsonEditorComponent extends HTMLElement {
     // browser calls this method when the element is added to the document
     // (can be called many times if an element is repeatedly added/removed)
 
-    this.content = this.getAttribute('value');
-    if(this.content === null){
-      this.content = {}
-    } else {
-      try {
-        this.content = JSON.parse(this.content);
-      } catch(e){
-        this.content = {};
-      }
-    }
+   this.content = {};
+
 
     this.init();
   }
@@ -38,7 +30,9 @@ class jsonEditorComponent extends HTMLElement {
       props: {
         content: {json: this.content},
         onChange: () => {
-          const event = new CustomEvent('json-updated');
+          const event = new CustomEvent('json-updated', {detail: {
+            content: this.getData()
+          }});
           this.dispatchEvent(event);
         }
       }

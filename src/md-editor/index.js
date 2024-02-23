@@ -24,20 +24,7 @@ class LNSYEdit extends HTMLElement {
       Tab: function(cm) {
         var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
         cm.replaceSelection(spaces);
-      },
-      'Shift-Ctrl-P': () => {   
-        console.log('control panel');     
-        this.dispatchEvent(new CustomEvent('control-panel',{
-          detail:{
-            cursor: this.editor.getCursor()
-          }
-        }))
-        return true
-      },
-      'Ctrl-S': () => {
-        this.saveData();
-        return true
-      } 
+      }
     });
 
     this.editor.on("change", () => {

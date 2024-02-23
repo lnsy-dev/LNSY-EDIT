@@ -48,11 +48,41 @@
 
   <json-editor id="json_editor"></json-editor>
   <md-editor id="md_editor"></md-editor>
+  <dialog id="control_panel_modal">
+    <button id="modal_close_button">x</button>
+    <input autofocus type="search" id="control_panel">
+  </dialog>
   <script>
     md_editor.addEventListener('BUFFER-CHANGED', (e) => {
       console.log(e.detail);
       // const {last_line, buffer} = e.detail;
     });
+
+    json_editor.addEventListener('json-updated', (e) => {
+      console.log(e.detail);
+    })
+
+    let control_panel_open = false;
+
+    modal_close_button.addEventListener('click', (e) => {
+      control_panel_open = false;
+      control_panel_modal.close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if(e.code === 'KeyP' && e.ctrlKey === true){
+        control_panel_open = true;
+        control_panel.focus();
+        control_panel_modal.setAttribute('open', true);
+      }
+
+      if(control_panel_open && e.code === 'Escape'){
+        control_panel_open = false;
+        control_panel_modal.close();
+      }
+    });
+
+
   </script>
 </main>
 
