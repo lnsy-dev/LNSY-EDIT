@@ -9,10 +9,9 @@
   <style>
     #menu {
       position: fixed;
-      left: 12pt;
+      left: 6pt;
       top: 6pt;
       z-index: 9000;
-      width: 20em;
       text-align: left;
       background-color: rgba(0,0,0,0.7);
 
@@ -26,19 +25,36 @@
         padding: 0;
       }
     }
+
+    main {
+      padding-top: 2em;
+      width: 40em;
+      float: left;
+      border-right: 1px solid grey;
+      min-height: 100vh;
+    }
   </style>
 </head>
 <body>
   <details id="menu">
     <summary>LNSY-EDIT</summary>
-    <p>
-      <li>Lorem ipsum dolor </li>
-      <li>Lorem ipsum dolor </li>
-      <li>Lorem ipsum dolor </li>
-      <li>Lorem ipsum dolor </li>
-
-    </p>
+    <ul>
+      <li>
+        <input type="string" name="filename" placeholder="filename">
+      </li>
+    </ul>
   </details>
+  <main>
+
+  <json-editor id="json_editor"></json-editor>
+  <md-editor id="md_editor"></md-editor>
+  <script>
+    md_editor.addEventListener('BUFFER-CHANGED', (e) => {
+      console.log(e.detail);
+      // const {last_line, buffer} = e.detail;
+    });
+  </script>
+</main>
 
 </body>
 </html>

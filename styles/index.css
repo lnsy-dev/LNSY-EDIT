@@ -1,9 +1,10 @@
 @import "./reset.css";
 @import "./variables.css";
+@import "../src/md-editor/index.css";
+@import "../src/json-editor/index.css";
 
 body {
   background-color: var(--bg-color);
   color: var(--fg-color);
   font-family: var(--font-family);
-  text-align: center;
 }
