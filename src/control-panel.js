@@ -36,6 +36,7 @@ class ControlPanelResults extends HTMLElement {
       this.results.innerHTML = control_panel_results.map(result => {
         return `<li>${result.name}, ${result.object}</li>`;
       }).join("");
+
       this.style.display = 'block';
       document.addEventListener('keydown', handleArrowKeys);
     } else {
@@ -48,13 +49,3 @@ class ControlPanelResults extends HTMLElement {
 }
 
 customElements.define('control-panel-results', ControlPanelResults)
-
-class TestObject extends HTMLElement {
-  connectedCallback(){
-    const value = this.innerHTML; 
-    this.innerHTML = `test object: ${value}`
-  }
-
-}
-
-customElements.define('test-object', TestObject)

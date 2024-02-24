@@ -2,6 +2,7 @@
 @import "./variables.css";
 @import "../src/md-editor/index.css";
 @import "../src/json-editor/index.css";
+@import "../src/mark-down/index.css";
 
 body {
   background-color: var(--bg-color);

@@ -28,16 +28,23 @@
 
     md-editor {
       display: block;
-      height: calc(100vh - 10em);
+      height: calc(100vh - 4.5em);
       padding-bottom: 1em;
     }
 
     main {
+
       padding-top: 2em;
       width: 40em;
       float: left;
       border-right: 1px solid grey;
       min-height: 100vh;
+    }
+
+    @media screen and (orientation: portrait) {
+      .main {
+        width: 100%;
+      }
     }
 
     #modal_close_button {
@@ -60,6 +67,42 @@
       display: block;
       height: 2em;
       font-size: 200%;
+    }
+
+    .panel {
+      position: fixed;
+      right: 0pt;
+      top: 0pt;
+      height: 100%;
+      width:calc(100% - 42em);
+      padding: 1em;
+      overflow: scroll;
+      background-color: rgba(0,0,0,0.8);
+      opacity: 0.8;
+
+    }
+
+    panel-indicator {
+      position: fixed;
+      right: 0px;
+      top: 0px;
+      z-index: 1000;
+    }
+
+    .panel-indicator {
+      display:block;
+      aspect-ratio: 1;
+      width: 2em;
+      font-size: 9pt;
+      padding: 0.1em;
+      border: 1px solid grey;
+      text-align: center;
+      float: left;
+    }
+
+    .panel-indicator.selected {
+      background-color: var(--fg-color);
+      color: var(--bg-color);
     }
   </style>
 </head>
@@ -88,7 +131,7 @@
     });
 
     json_editor.addEventListener('json-updated', (e) => {
-    })
+    });
 
     let control_panel_open = false;
 
@@ -115,6 +158,51 @@
   </script>
 
 </main>
+
+
+<panel-indicator index="1"></panel-indicator>
+
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+  const container = document.body;
+
+  for (let i = 1; i <= 10; i++) {
+    const panel = document.createElement('div');
+    panel.id = `panel-${i}`;
+    panel.className = 'panel';
+    panel.textContent = `Panel ${i}`;
+    container.appendChild(panel);
+  }
+});
+
+
+document.addEventListener('keydown', function(event) {
+  if (event.ctrlKey) {
+    let panelNumber = event.key === '0' ? 10 : parseInt(event.key);
+    if (panelNumber >= 1 && panelNumber <= 10) {
+      bringToFront(panelNumber);
+    }
+  }
+});
+
+function bringToFront(panelIndex) {
+  // Reset z-index for all panels
+  document.querySelectorAll('.panel').forEach(panel => {
+    panel.style.zIndex = 1;
+  });
+
+  document.querySelector('panel-indicator').setAttribute('index', panelIndex);
+
+  // Bring the specified panel to the front
+  document.getElementById(`panel-${panelIndex}`).style.zIndex = 10;
+}
+
+
+
+</script>
+
 
 </body>
 </html>
