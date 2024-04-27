@@ -1,0 +1,79 @@
+<!-- this is the text block that we are going to be editing -->
+
+<div id="text_content" contenteditable onkeyup="saveBuffer()"></div>
+
+<!-- these are the buttons we will use to edit our text -->
+<input type="text" id="file_name" value="file-name.txt">
+<button id="save_button" onclick="saveFile()">Save File</button>
+<input id="file_loader" type="file" onchange="loadFile()" placeholder="Load File" accept=".js, .txt, .md, .css">
+<button id="clear_buffer" onclick="clearBuffer()">Clear Buffer</button>
+<button id="run_file" onclick="runFile()">Run File</button>
+
+<script>
+  function saveFile(){
+    var blob = new Blob([text_content.innerText], { type: 'text/plain' });
+    const downloadLink = document.createElement('a');
+    downloadLink.href = window.URL.createObjectURL(blob);
+    downloadLink.download = file_name.value;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+
+  function loadFile(){
+
+    const reader = new FileReader();
+    reader.addEventListener('load', function() {
+      text_content.innerText = reader.result;
+    });
+
+    // every event has a target
+    const selected_file = file_loader.files[0];
+    reader.readAsText(selected_file);
+  }
+
+  function saveBuffer(){
+    localStorage.setItem('buffer-content', text_content.innerHTML);
+  }
+
+  function loadBuffer(){
+    const buffer_content = localStorage.getItem('buffer-content');
+    console.log(buffer_content);
+    if(buffer_content !== 'null'){
+      text_content.innerHTML = buffer_content;
+    }
+  }
+
+  function runFile(){
+    const code = text_content.innerText;
+    try {
+      eval(code)
+    } catch(e){
+      console.error(e.message);
+    }
+  }
+
+  function clearBuffer(){
+    text_content.innerText = '';
+  }
+
+
+  // these are events that we can listen to
+  document.addEventListener("DOMContentLoaded", (event) => {
+    loadBuffer();
+  });
+
+
+</script>
+
+<style>
+
+  #text_content {
+    font-family: monospace;
+    border: 1px solid white;
+    padding: 1em;
+    height: calc(100% - 4em);
+    overflow: scroll;
+    margin-bottom: 0.5em;
+  }
+</style>
