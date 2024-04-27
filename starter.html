@@ -1,0 +1,59 @@
+
+<textarea id="text_content" onkeyup="saveBuffer()"></textarea>
+<input type="text" id="file_name" value="editor.html">
+<button id="save_button" onclick="saveFile()">Save File</button>
+<input id="file_loader" type="file" onchange="loadFile()" placeholder="Load File" accept=".js, .txt, .md, .css, .html">
+
+<script>
+  function saveFile(){
+    var blob = new Blob([text_content.value], { type: 'text/plain' });
+    const download_link = document.createElement('a');
+    download_link.href = window.URL.createObjectURL(blob);
+    download_link.download = file_name.value;
+    document.body.appendChild(download_link);
+    download_link.click();
+    document.body.removeChild(download_link);
+  }
+
+  function loadFile(){
+    const reader = new FileReader();
+    reader.addEventListener('load', function() {
+      text_content.value = reader.result
+    });
+    const selected_file = file_loader.files[0];
+    reader.readAsText(selected_file)
+  }
+
+  function saveBuffer(){
+    localStorage.setItem('buffer-content', text_content.value)
+  }
+
+  function loadBuffer(){
+    const buffer_content = localStorage.getItem('buffer-content')
+    if(buffer_content !== 'null'){
+      text_content.innerHTML = buffer_content
+    }
+  }
+
+
+  document.addEventListener("DOMContentLoaded", (event) => {
+    loadBuffer()
+  })
+
+  document.addEventListener('keydown', (e) => {
+    if(!e.ctrlKey) return
+    if(e.key === 'o') file_loader.click()
+    if(e.key === 's') saveFile()
+  })
+</script>
+
+<style>
+
+  #text_content {
+    padding: 1em;
+    height: calc(100% - 2em);
+    width: 100%;
+    overflow: scroll;
+    margin-bottom: 0.5em;
+  }
+</style>

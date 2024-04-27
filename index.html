@@ -1,32 +1,91 @@
-<div id="text_content" contenteditable onkeyup="saveBuffer()"></div>
-<input type="text" id="file_name" value="file-name.txt">
-<button id="save_button" onclick="saveFile()">Save File</button>
-<input id="file_loader" type="file" onchange="loadFile()" placeholder="Load File" accept=".js, .txt, .md, .css">
-<button id="clear_buffer" onclick="clearBuffer()">Clear Buffer</button>
-<button id="run_file" onclick="runFile()">Run File</button>
+<!-- This is an HTML Comment. 
+  It lets us talk to ourselves. 
+  If you write software you will end up talking to yourself quite a bit.  
+-->
+
+<!--
+  TextAreas allow us to enter multi-line strings of text into a web page.
+  
+  Every item that is wrapped in <> characters gives us certain functions. 
+
+  Every div, with a few exceptions that I will get to shortly,
+
+  for instance, the following div looks like this: 
+-->
+<textarea 
+  id="text_content"
+  onkeyup="saveBuffer()">
+</textarea>
+
+<!--
+  <textarea -- this is the name of the element. It tells the browser how to render something
+    id="text_content" -- this is the ID of the element. It tells the browser the variable name for the item.
+    onkeyup="saveBuffer()"> -- this is a function. This means that it will run a bit of code with the name "saveBuffer" every time your fingers come up from the keys
+-->
+
+<!-- 
+  Inputs are good for single line strings - like file names! 
+-->
+<input 
+  id="file_name" 
+  type="text" 
+  value="file-name.txt">
+</input>
+
+<!-- 
+  A button gives us a way to interact with the document. It's job is to run a function when you click it. 
+
+  This button runs onclick when you save.
+-->
+<button 
+  id="save_button" 
+  onclick="saveFile()">
+    Save File
+</button>
+
+<!--
+  This is a more complex input. It has 
+-->
+<input 
+  id="file_loader" 
+  type="file" 
+  onchange="loadFile()"  
+  accept=".js, .txt, .md, .css, .html">  
+</input>
+<button 
+  id="clear_buffer" 
+  onclick="clearBuffer()">
+    Clear Buffer
+</button>
+
+<button 
+  id="run_file" 
+  onclick="runFile()">
+    Run File
+</button>
 
 <script>
   function saveFile(){
-    var blob = new Blob([text_content.innerText], { type: 'text/plain' });
-    const downloadLink = document.createElement('a');
-    downloadLink.href = window.URL.createObjectURL(blob);
-    downloadLink.download = file_name.value;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+    var blob = new Blob([text_content.value], { type: 'text/plain' });
+    const download_link = document.createElement('a');
+    download_link.href = window.URL.createObjectURL(blob);
+    download_link.download = file_name.value;
+    document.body.appendChild(download_link);
+    download_link.click();
+    document.body.removeChild(download_link);
   }
 
   function loadFile(){
     const reader = new FileReader();
     reader.addEventListener('load', function() {
-      text_content.innerText = reader.result
+      text_content.value = reader.result
     });
     const selected_file = file_loader.files[0];
     reader.readAsText(selected_file)
   }
 
   function saveBuffer(){
-    localStorage.setItem('buffer-content', text_content.innerHTML)
+    localStorage.setItem('buffer-content', text_content.value)
   }
 
   function loadBuffer(){
@@ -37,7 +96,7 @@
   }
 
   function runFile(){
-    const code = text_content.innerText
+    const code = text_content.value
     try {
       eval(code)
     } catch(e){
@@ -46,7 +105,7 @@
   }
 
   function clearBuffer(){
-    text_content.innerText = ''
+    text_content.value = ''
   }
 
   document.addEventListener("DOMContentLoaded", (event) => {
@@ -63,12 +122,16 @@
 </script>
 
 <style>
-
+  body {
+    background-color:black;
+    color: chartreuse;
+  }
   #text_content {
-    font-family: monospace;
-    border: 1px dashed lightgrey;
+    background-color: black;
+    color: chartreuse;
     padding: 1em;
-    height: calc(100% - 4em);
+    height: calc(100% - 2em);
+    width: 100%;
     overflow: scroll;
     margin-bottom: 0.5em;
   }
