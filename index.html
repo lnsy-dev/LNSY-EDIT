@@ -1,8 +1,4 @@
-<!-- this is the text block that we are going to be editing -->
-
 <div id="text_content" contenteditable onkeyup="saveBuffer()"></div>
-
-<!-- these are the buttons we will use to edit our text -->
 <input type="text" id="file_name" value="file-name.txt">
 <button id="save_button" onclick="saveFile()">Save File</button>
 <input id="file_loader" type="file" onchange="loadFile()" placeholder="Load File" accept=".js, .txt, .md, .css">
@@ -21,56 +17,56 @@
   }
 
   function loadFile(){
-
     const reader = new FileReader();
     reader.addEventListener('load', function() {
-      text_content.innerText = reader.result;
+      text_content.innerText = reader.result
     });
-
-    // every event has a target
     const selected_file = file_loader.files[0];
-    reader.readAsText(selected_file);
+    reader.readAsText(selected_file)
   }
 
   function saveBuffer(){
-    localStorage.setItem('buffer-content', text_content.innerHTML);
+    localStorage.setItem('buffer-content', text_content.innerHTML)
   }
 
   function loadBuffer(){
-    const buffer_content = localStorage.getItem('buffer-content');
-    console.log(buffer_content);
+    const buffer_content = localStorage.getItem('buffer-content')
     if(buffer_content !== 'null'){
-      text_content.innerHTML = buffer_content;
+      text_content.innerHTML = buffer_content
     }
   }
 
   function runFile(){
-    const code = text_content.innerText;
+    const code = text_content.innerText
     try {
       eval(code)
     } catch(e){
-      console.error(e.message);
+      console.error(e.message)
     }
   }
 
   function clearBuffer(){
-    text_content.innerText = '';
+    text_content.innerText = ''
   }
 
-
-  // these are events that we can listen to
   document.addEventListener("DOMContentLoaded", (event) => {
-    loadBuffer();
-  });
+    loadBuffer()
+  })
 
-
+  document.addEventListener('keydown', (e) => {
+    if(!e.ctrlKey) return
+    if(e.key === 'o') file_loader.click()
+    if(e.key === 's') saveFile()
+    if(e.key === 'r') runFile()
+    if(e.key === 'Escape') clearBuffer()
+  })
 </script>
 
 <style>
 
   #text_content {
     font-family: monospace;
-    border: 1px solid white;
+    border: 1px dashed lightgrey;
     padding: 1em;
     height: calc(100% - 4em);
     overflow: scroll;
