@@ -1,6 +1,10 @@
 export default class FileClerk {
   #fileHandle = null;
 
+  newFile() {
+    this.#fileHandle = null;
+  }
+
   async load() {
     try {
       const [fileHandle] = await window.showOpenFilePicker({

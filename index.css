@@ -31,3 +31,7 @@ warning {
 error {
   color: red;
 }
+
+preview-component {
+  background-color: white;
+}

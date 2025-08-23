@@ -23,8 +23,8 @@ editor-menu li:hover {
   background-color: var(--lnsy-edit-selection);
 }
 
-editor-menu ul ul {
-  display: none;
+editor-menu .dropdown {
+  display: block;
   position: absolute;
   top: 100%;
   left: 0;
@@ -34,11 +34,13 @@ editor-menu ul ul {
   z-index: 1;
 }
 
-editor-menu li:hover > ul {
-  display: block;
+
+
+editor-menu .dropdown.hidden {
+  display: none;
 }
 
-editor-menu ul ul li {
+editor-menu .dropdown li {
     display: block;
     width: 9.375rem;
 }

@@ -1,0 +1,11 @@
+preview-component {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+preview-component iframe {
+  height: 100%;
+  width: 100%;
+  border: none;
+}

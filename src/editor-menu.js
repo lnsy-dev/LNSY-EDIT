@@ -7,9 +7,10 @@ class EditorMenu extends HTMLElement {
     this.innerHTML = `
       <nav>
         <ul>
-          <li>
+          <li class="file-menu">
             File
-            <ul>
+            <ul class="dropdown hidden">
+              <li data-action="new">New</li>
               <li data-action="load">Load</li>
               <li data-action="save">Save</li>
               <li data-action="toggle-autosave">Toggle Autosave</li>
@@ -18,6 +19,13 @@ class EditorMenu extends HTMLElement {
         </ul>
       </nav>
     `;
+
+    const fileMenu = this.querySelector('.file-menu');
+    const dropdown = this.querySelector('.dropdown');
+
+    fileMenu.addEventListener('click', (e) => {
+      dropdown.classList.toggle('hidden');
+    });
 
     this.addEventListener('click', (e) => {
       if (e.target.dataset.action) {
@@ -28,6 +36,13 @@ class EditorMenu extends HTMLElement {
             action: e.target.dataset.action
           }
         }));
+        dropdown.classList.add('hidden');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!this.contains(e.target)) {
+        dropdown.classList.add('hidden');
       }
     });
   }

@@ -15,6 +15,13 @@ class EditorComponent extends HTMLElement {
 
     menu.addEventListener('menu-item-click', async (e) => {
       switch (e.detail.action) {
+        case 'new': {
+          this.fileClerk.newFile();
+          this.view.dispatch({
+            changes: { from: 0, to: this.view.state.doc.length, insert: '' }
+          });
+          break;
+        }
         case 'load': {
           const file = await this.fileClerk.load();
           if (file) {
@@ -38,7 +45,7 @@ class EditorComponent extends HTMLElement {
 
     const view = new EditorView({
       parent: editorContainer,
-      doc: "Hello",
+      doc: "",
       rulers: [{ column: 40, color: "var(--light-neutral)", lineStyle: "dashed" }],
 
       extensions: [
