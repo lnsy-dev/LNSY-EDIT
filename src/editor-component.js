@@ -37,10 +37,19 @@ const htmlLinter = (view) => {
 };
 
 class EditorComponent extends HTMLElement {
-  connectedCallback(){
+  dirty = false;
+
+  connectedCallback() {
     this.fileClerk = new FileClerk();
     const menu = document.createElement('editor-menu');
     this.appendChild(menu);
+
+    window.addEventListener('beforeunload', (event) => {
+      if (this.dirty) {
+        event.preventDefault();
+        event.returnValue = '';
+      }
+    });
 
     menu.addEventListener('menu-item-click', async (e) => {
       switch (e.detail.action) {
@@ -49,6 +58,7 @@ class EditorComponent extends HTMLElement {
           this.view.dispatch({
             changes: { from: 0, to: this.view.state.doc.length, insert: '' }
           });
+          this.dirty = false;
           break;
         }
         case 'load': {
@@ -57,12 +67,16 @@ class EditorComponent extends HTMLElement {
             this.view.dispatch({
               changes: { from: 0, to: this.view.state.doc.length, insert: file.content }
             });
+            this.dirty = false;
           }
           break;
         }
         case 'save': {
           const content = this.view.state.doc.toString();
-          await this.fileClerk.save(content);
+          const success = await this.fileClerk.save(content);
+          if(success){
+            this.dirty = false;
+          }
           break;
         }
       }
@@ -75,10 +89,8 @@ class EditorComponent extends HTMLElement {
     const view = new EditorView({
       parent: editorContainer,
       doc: "",
-      rulers: [{ column: 40, color: "var(--light-neutral)", lineStyle: "dashed" }],
-
       extensions: [
-        basicSetup, 
+        basicSetup,
         html(),
         linter(htmlLinter),
         lintGutter(),
@@ -87,6 +99,7 @@ class EditorComponent extends HTMLElement {
         SyntaxHighlightingTheme,
         EditorView.updateListener.of((update) => {
           if (update.docChanged) {
+            this.dirty = true;
             this.dispatchEvent(new CustomEvent('EDITOR-UPDATED', {
               bubbles: true,
               composed: true
