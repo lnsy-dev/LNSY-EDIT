@@ -1,11 +1,40 @@
 import {EditorView, basicSetup} from "codemirror"
 import {html} from "@codemirror/lang-html"
 import {keymap} from "@codemirror/view"
+import {linter, lintGutter} from "@codemirror/lint"
+import {HTMLHint} from "htmlhint"
 import {completionKeymap} from "./completions.js"
 import "./editor-menu.js"
 import "./editor-footer.js"
 import {EditorTheme, SyntaxHighlightingTheme} from "./theme.js";
 import FileClerk from "./file-clerk.js";
+
+const htmlLinter = (view) => {
+  const diagnostics = [];
+  const results = HTMLHint.verify(view.state.doc.toString(), {
+    "tagname-lowercase": true,
+    "attr-lowercase": true,
+    "attr-value-double-quotes": true,
+    "doctype-first": true,
+    "tag-pair": true,
+    "spec-char-escape": true,
+    "id-unique": true,
+    "src-not-empty": true,
+    "attr-no-duplication": true,
+    "title-require": true
+  });
+  results.forEach(r => {
+    const from = view.state.doc.line(r.line).from + r.col - 1;
+    const to = from + (r.raw ? r.raw.length : 1);
+    diagnostics.push({
+      from,
+      to,
+      severity: r.type,
+      message: r.message,
+    })
+  });
+  return diagnostics
+};
 
 class EditorComponent extends HTMLElement {
   connectedCallback(){
@@ -51,6 +80,8 @@ class EditorComponent extends HTMLElement {
       extensions: [
         basicSetup, 
         html(),
+        linter(htmlLinter),
+        lintGutter(),
         keymap.of([completionKeymap]),
         EditorTheme,
         SyntaxHighlightingTheme,

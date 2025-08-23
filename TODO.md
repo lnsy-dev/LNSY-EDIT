@@ -3,7 +3,7 @@
 - [x] new file command
 - [ ] last saved event in footer.
 - [ ] Each highlighted line should have a brighter theme than what we had before
-- [ ] Split screen -- show the rendered html to the right
+- [x] Split screen -- show the rendered html to the right
 - [ ] Ctrl-S saves file and re-renders HTML panel
 - [ ] Autosave automatically re-renders html
 - [ ] Linting https://codemirror.net/examples/lint/
