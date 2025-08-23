@@ -16,10 +16,12 @@ class EditorComponent extends HTMLElement {
     menu.addEventListener('menu-item-click', async (e) => {
       switch (e.detail.action) {
         case 'load': {
-          const { content } = await this.fileClerk.load();
-          this.view.dispatch({
-            changes: { from: 0, to: this.view.state.doc.length, insert: content }
-          });
+          const file = await this.fileClerk.load();
+          if (file) {
+            this.view.dispatch({
+              changes: { from: 0, to: this.view.state.doc.length, insert: file.content }
+            });
+          }
           break;
         }
         case 'save': {

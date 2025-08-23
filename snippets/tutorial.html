@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>This is the title</title>
+  <script type="module">
+    class ElementName extends HTMLElement {
+      connectedCallback(){
+      }
+    
+      static get observedAttributes() {
+        return [];
+      }
+    
+      attributeChangedCallback(name, old_value, new_value){
+        switch(name){
+          default:
+        }
+      }
+    
+    }
+    
+    customElements.define('element-tag-name', ElementName);
+
+  </script>
+</head>
+<body>
+
+<element-tag-name id="element_id"></element-tag-name>
+
+
+<script>
+  
+
+  
+</script>
+
+
+</body>
+</html>

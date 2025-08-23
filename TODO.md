@@ -24,7 +24,15 @@
 - [ ] Keyboard only navigation -- including menus, help, etc.
 - [ ] Metadata, ala the YAML front matter. Easy creation. 
 - [ ] YAML markdown mode, converts to html page
-
-
+- [ ] LLM support, select, prompt accept reject copy. Requires user key -- user flow
+- [ ] Markdown Mode / HTML mode. Converts to/from markdown every file. Maybe a selction?
+  - [ ] user selects section, selects "markdown editor" from menu. A new dialog opens up with a new code-mirror element that is pure markdown. Or maybe Quill: https://github.com/slab/quill, https://quilljs.com/playground/snow
+- [ ] Multiple File support with Tab workflow. Would export .zip folder? 
+- [ ] Image upload support -- embedding images into html
+- [ ] Export gzipped file
+- [ ] Footnotes / Reference setup
+- [ ] Default css styles (tufte.css?)
+- [ ] Tufte.css template at least
+- [ ] Dialog editor workflow -- for editing things like images, image quilts, code? 
 
 Thinking about highlighting and un-highlighting text. I like how Obsidian has a WYSIWYG for markdown, can I do something similar for HTML? Can you change the font size
