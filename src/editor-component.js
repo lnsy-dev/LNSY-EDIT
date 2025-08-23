@@ -3,17 +3,35 @@ import {html} from "@codemirror/lang-html"
 import {keymap} from "@codemirror/view"
 import {completionKeymap} from "./completions.js"
 import "./editor-menu.js"
+import "./editor-footer.js"
+import {EditorTheme} from "./theme.js";
+import FileClerk from "./file-clerk.js";
 
 class EditorComponent extends HTMLElement {
   connectedCallback(){
+    this.fileClerk = new FileClerk();
     const menu = document.createElement('editor-menu');
     this.appendChild(menu);
 
-    menu.addEventListener('menu-item-click', (e) => {
-        console.log('Menu item selected:', e.detail.action);
+    menu.addEventListener('menu-item-click', async (e) => {
+      switch (e.detail.action) {
+        case 'load': {
+          const { content } = await this.fileClerk.load();
+          this.view.dispatch({
+            changes: { from: 0, to: this.view.state.doc.length, insert: content }
+          });
+          break;
+        }
+        case 'save': {
+          const content = this.view.state.doc.toString();
+          await this.fileClerk.save(content);
+          break;
+        }
+      }
     });
 
     const editorContainer = document.createElement('div');
+    editorContainer.classList.add('editor-container');
     this.appendChild(editorContainer);
 
     const view = new EditorView({
@@ -23,8 +41,26 @@ class EditorComponent extends HTMLElement {
         basicSetup, 
         html(),
         keymap.of([completionKeymap]),
+        EditorTheme,
+        EditorView.updateListener.of((update) => {
+          if (update.docChanged) {
+            this.dispatchEvent(new CustomEvent('EDITOR-UPDATED', {
+              bubbles: true,
+              composed: true
+            }));
+          }
+        })
       ]
     });
+    this.view = view;
+
+    const footer = document.createElement('editor-footer');
+    this.appendChild(footer);
+  }
+
+  getFileSize(){
+    const content = this.view.state.doc.toString();
+    return new TextEncoder().encode(content).length;
   }
 
   static get observedAttributes() {
@@ -39,4 +75,4 @@ class EditorComponent extends HTMLElement {
 
 }
 
-customElements.define('lnsy-edit', EditorComponent)
+customElements.define('lnsy-edit', EditorComponent);

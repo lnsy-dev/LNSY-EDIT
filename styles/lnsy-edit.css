@@ -1,0 +1,110 @@
+/* Based on the default CodeMirror theme */
+
+.cm-s-lnsy-edit.CodeMirror {
+  background: var(--lnsy-edit-background);
+  color: var(--lnsy-edit-foreground);
+}
+
+.cm-s-lnsy-edit div.CodeMirror-selected {
+  background: var(--lnsy-edit-selection);
+}
+
+.cm-s-lnsy-edit .CodeMirror-gutters {
+  background: var(--lnsy-edit-gutter-background);
+  border-right: 1px solid var(--lnsy-edit-gutter-border);
+}
+
+.cm-s-lnsy-edit .CodeMirror-guttermarker {
+  color: var(--lnsy-edit-guttermarker);
+}
+
+.cm-s-lnsy-edit .CodeMirror-guttermarker-subtle {
+  color: var(--lnsy-edit-guttermarker-subtle);
+}
+
+.cm-s-lnsy-edit .CodeMirror-linenumber {
+  color: var(--lnsy-edit-linenumber);
+}
+
+.cm-s-lnsy-edit .CodeMirror-cursor {
+  border-left: 1px solid var(--lnsy-edit-cursor);
+}
+
+.cm-s-lnsy-edit span.cm-comment {
+  color: var(--lnsy-edit-comment);
+}
+
+.cm-s-lnsy-edit span.cm-atom {
+  color: var(--lnsy-edit-atom);
+}
+
+.cm-s-lnsy-edit span.cm-number {
+  color: var(--lnsy-edit-number);
+}
+
+.cm-s-lnsy-edit span.cm-property,
+.cm-s-lnsy-edit span.cm-attribute {
+  color: var(--lnsy-edit-property);
+}
+
+.cm-s-lnsy-edit span.cm-keyword {
+  color: var(--lnsy-edit-keyword);
+}
+
+.cm-s-lnsy-edit span.cm-string {
+  color: var(--lnsy-edit-string);
+}
+
+.cm-s-lnsy-edit span.cm-variable {
+  color: var(--lnsy-edit-variable);
+}
+
+.cm-s-lnsy-edit span.cm-variable-2 {
+  color: var(--lnsy-edit-variable-2);
+}
+
+.cm-s-lnsy-edit span.cm-def {
+  color: var(--lnsy-edit-def);
+}
+
+.cm-s-lnsy-edit span.cm-bracket {
+  color: var(--lnsy-edit-bracket);
+}
+
+.cm-s-lnsy-edit span.cm-tag {
+  color: var(--lnsy-edit-tag);
+}
+
+.cm-s-lnsy-edit span.cm-link {
+  color: var(--lnsy-edit-link);
+}
+
+.cm-s-lnsy-edit span.cm-error {
+  background: var(--lnsy-edit-error-background);
+  color: var(--lnsy-edit-error-foreground);
+}
+
+.cm-s-lnsy-edit .CodeMirror-activeline-background {
+  background: var(--lnsy-edit-activeline-background);
+}
+
+.cm-s-lnsy-edit .CodeMirror-matchingbracket {
+  color: var(--lnsy-edit-matchingbracket-color) !important;
+  background: var(--lnsy-edit-matchingbracket-background);
+}
+
+lnsy-edit {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.editor-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.cm-editor {
+    height: 100%;
+}

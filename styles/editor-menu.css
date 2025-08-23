@@ -1,0 +1,44 @@
+editor-menu nav {
+  height: calc(var(--line-height) * 2);
+  background-color: var(--lnsy-edit-gutter-background);
+  padding: 0.3125rem;
+  border-bottom: 0.0625rem solid var(--lnsy-edit-gutter-border);
+}
+
+editor-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+editor-menu li {
+  display: inline-block;
+  position: relative;
+  padding: 0.3125rem 0.625rem;
+  cursor: pointer;
+}
+
+editor-menu li:hover {
+  background-color: var(--lnsy-edit-selection);
+}
+
+editor-menu ul ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--lnsy-edit-background);
+  border: 0.0625rem solid var(--lnsy-edit-gutter-border);
+  padding: 0;
+  z-index: 1;
+}
+
+editor-menu li:hover > ul {
+  display: block;
+}
+
+editor-menu ul ul li {
+    display: block;
+    width: 9.375rem;
+}

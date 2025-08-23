@@ -1,5 +1,33 @@
 :root {
+  --line-height: 1rem;
   --bg-color: black;
-  --bg-color: white;
+  --fg-color: white;
+  --lnsy-edit-background: var(--bg-color);
+  --lnsy-edit-foreground: var(--fg-color);
+  --lnsy-edit-selection: #3e4451;
+  --lnsy-edit-gutter-background: #282c34;
+  --lnsy-edit-gutter-border: #3e4451;
+  --lnsy-edit-guttermarker: #abb2bf;
+  --lnsy-edit-guttermarker-subtle: #5c6370;
+  --lnsy-edit-linenumber: #5c6370;
+  --lnsy-edit-cursor: #528bff;
+  --lnsy-edit-comment: #5c6370;
+  --lnsy-edit-atom: #d19a66;
+  --lnsy-edit-number: #d19a66;
+  --lnsy-edit-property: #c678dd;
+  --lnsy-edit-attribute: #d19a66;
+  --lnsy-edit-keyword: #c678dd;
+  --lnsy-edit-string: #98c379;
+  --lnsy-edit-variable: #61afef;
+  --lnsy-edit-variable-2: #e06c75;
+  --lnsy-edit-def: #e5c07b;
+  --lnsy-edit-bracket: #abb2bf;
+  --lnsy-edit-tag: #e06c75;
+  --lnsy-edit-link: #61afef;
+  --lnsy-edit-error-background: #e06c75;
+  --lnsy-edit-error-foreground: #f8f8f2;
+  --lnsy-edit-activeline-background: #2c313a;
+  --lnsy-edit-matchingbracket-color: #f8f8f2 !important;
+  --lnsy-edit-matchingbracket-background: #3b4048;
 }
 

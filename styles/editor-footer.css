@@ -1,0 +1,8 @@
+editor-footer {
+  height: calc(var(--line-height) * 2);
+  background-color: var(--lnsy-edit-gutter-background);
+  border-top: 0.0625rem solid var(--lnsy-edit-gutter-border);
+  padding: 0.3125rem;
+  display: flex;
+  align-items: center;
+}
