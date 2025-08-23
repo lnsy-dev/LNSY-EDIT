@@ -37,6 +37,8 @@ class EditorComponent extends HTMLElement {
     const view = new EditorView({
       parent: editorContainer,
       doc: "Hello",
+      rulers: [{ column: 40, color: "var(--light-neutral)", lineStyle: "dashed" }],
+
       extensions: [
         basicSetup, 
         html(),
