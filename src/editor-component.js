@@ -4,7 +4,7 @@ import {keymap} from "@codemirror/view"
 import {completionKeymap} from "./completions.js"
 import "./editor-menu.js"
 import "./editor-footer.js"
-import {EditorTheme} from "./theme.js";
+import {EditorTheme, SyntaxHighlightingTheme} from "./theme.js";
 import FileClerk from "./file-clerk.js";
 
 class EditorComponent extends HTMLElement {
@@ -53,6 +53,7 @@ class EditorComponent extends HTMLElement {
         html(),
         keymap.of([completionKeymap]),
         EditorTheme,
+        SyntaxHighlightingTheme,
         EditorView.updateListener.of((update) => {
           if (update.docChanged) {
             this.dispatchEvent(new CustomEvent('EDITOR-UPDATED', {

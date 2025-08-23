@@ -11,7 +11,7 @@
 - [ ] Other decorations that allow users to easily access html elements
 - [ ] check auto completions: https://codemirror.net/examples/autocompletion/
 - [ ] gutter style pass: https://codemirror.net/examples/gutter/
-- [ ] refactor codemirror theme: https://github.com/codemirror/theme-one-dark/
+- [x] refactor codemirror theme: https://github.com/codemirror/theme-one-dark/
 - [ ] Explore further extensions: https://github.com/emmetio/codemirror6-plugin
 - [ ] Rework snippets to use Sublime Text snippets? https://github.com/A99US/codemirror-6-snippetbuilder
 - [ ] Sublime Text bindings: https://codemirror.net/5/demo/sublime.html
