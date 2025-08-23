@@ -13,6 +13,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   color: var(--fg-color);
   background-color: var(--bg-color);
+  font-size: 12px;
 }
 
 lnsy-edit {

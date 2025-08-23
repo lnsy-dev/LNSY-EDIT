@@ -1,0 +1,6 @@
+- [ ] completions folder -- each completion a .txt file that is rendered
+- [ ] cancel save command throws error -- handle this gracefully
+- [ ] new file command
+- [ ] last saved event in footer.
+- [ ] Each highlighted line should have a brighter theme than what we had before
+- [ ] Split screen -- show the rendered html to the right

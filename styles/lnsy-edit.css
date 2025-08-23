@@ -93,6 +93,10 @@
   background: var(--lnsy-edit-matchingbracket-background);
 }
 
+.ci {
+  color: var(--lnsy-edit-tag) !important;
+}
+
 lnsy-edit {
   display: flex;
   flex-direction: column;
