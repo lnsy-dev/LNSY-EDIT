@@ -39,7 +39,8 @@
   --lnsy-edit-error-background: var(--neutral-background);
   --lnsy-edit-error-foreground: var(--error);
   --lnsy-edit-activeline-background: var(--neutral-extra-dark);
-  --lnsy-edit-matchingbracket-color: var(--neutral-light) !important;
-  --lnsy-edit-matchingbracket-background: var(--neutral-light);
+  --lnsy-edit-matchingbracket-color: var(--bg-color) !important;
+  --lnsy-edit-matchingbracket-background: var(--neutral);
+
 }
 

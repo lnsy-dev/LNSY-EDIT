@@ -32,6 +32,11 @@ export const EditorTheme = EditorView.theme({
 
   ".cm-activeLine": {
     backgroundColor: "var(--lnsy-edit-activeline-background)"
+  },
+
+  "&.cm-focused .cm-matchingBracket, &.cm-focused .cm-surround": {
+    backgroundColor: "var(--lnsy-edit-matchingbracket-background)",
+    color: "var(--lnsy-edit-matchingbracket-color)"
   }
 }, {dark: true})
 
