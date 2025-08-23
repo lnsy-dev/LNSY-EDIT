@@ -1,5 +1,18 @@
 {
   "scripts": {
-    "start": "npx live-server"
+    "build": "rspack build",
+    "start": "rspack serve"
+  },
+  "devDependencies": {
+    "@rspack/cli": "^1.4.11",
+    "@rspack/core": "^1.4.11",
+    "css-loader": "^7.1.2",
+    "html-rspack-plugin": "^6.1.2",
+    "style-loader": "^4.0.0"
+  },
+  "dependencies": {
+    "@codemirror/lang-html": "^6.4.9",
+    "@codemirror/language": "^6.11.3",
+    "codemirror": "^6.0.2"
   }
 }
