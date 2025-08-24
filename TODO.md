@@ -5,6 +5,7 @@
 - [ ] Each highlighted line should have a brighter theme than what we had before
 - [x] Split screen -- show the rendered html to the right
 - [ ] Ctrl-S saves file and re-renders HTML panel
+- [ ] Ctrl-O opens file
 - [ ] Autosave automatically re-renders html
 - [ ] Linting https://codemirror.net/examples/lint/
 - [ ] Boolean toggles: https://codemirror.net/examples/decoration/
@@ -34,5 +35,20 @@
 - [ ] Default css styles (tufte.css?)
 - [ ] Tufte.css template at least
 - [ ] Dialog editor workflow -- for editing things like images, image quilts, code? 
+- [ ] If window.showOpenFilePicker is not a function
+TypeError: window.showOpenFilePicker is not a function
+    at FileClerk.load (http://localhost:8080/bundle.js:6858:41)
+    at EditorMenu.<anonymous> (http://localhost:8080/bundle.js:6655:45)
+    at EditorMenu.<anonymous> (http://localhost:8080/bundle.js:6807:14)
+      show an upload in a <dialog> tag
+- [ ] if ERROR
+window.showSaveFilePicker is not a function
+TypeError: window.showSaveFilePicker is not a function
+    at FileClerk.saveAs (http://localhost:8080/bundle.js:6895:39)
+    at FileClerk.save (http://localhost:8080/bundle.js:6889:19)
+    at EditorMenu.<anonymous> (http://localhost:8080/bundle.js:6666:48)
+    at EditorMenu.<anonymous> (http://localhost:8080/bundle.js:6807:14)
+      show a download link in a <dialog> tag
+
 
 Thinking about highlighting and un-highlighting text. I like how Obsidian has a WYSIWYG for markdown, can I do something similar for HTML? Can you change the font size
