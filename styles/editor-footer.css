@@ -6,3 +6,7 @@ editor-footer {
   display: flex;
   align-items: center;
 }
+
+editor-footer notice {
+  padding-left: 7pt;
+}
