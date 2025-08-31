@@ -1,10 +1,10 @@
-import completions from '../completions.json';
+import completions from "../completions.json";
 
 export const completionKeymap = {
   key: "Tab",
   run: (view) => {
-    const {state, dispatch} = view;
-    const {from, to} = state.selection.main;
+    const { state, dispatch } = view;
+    const { from, to } = state.selection.main;
     if (from !== to) {
       view.dispatch(view.state.replaceSelection("  "));
       return true;
@@ -19,10 +19,19 @@ export const completionKeymap = {
     const lineContent = state.doc.sliceString(line.from, to);
     const lastWord = lineContent.split(/\s+/).pop();
 
-    if (completions[lastWord]) {
+    // Find completion by name in the array
+    const completion = completions.find((c) => c.name === lastWord);
+
+    if (completion) {
       const transaction = state.update({
-        changes: {from: from - lastWord.length, to, insert: completions[lastWord]},
-        selection: {anchor: from - lastWord.length + completions[lastWord].length}
+        changes: {
+          from: from - lastWord.length,
+          to,
+          insert: completion.content,
+        },
+        selection: {
+          anchor: from - lastWord.length + completion.content.length,
+        },
       });
       dispatch(transaction);
       return true;
@@ -30,5 +39,5 @@ export const completionKeymap = {
 
     view.dispatch(view.state.replaceSelection("  "));
     return true;
-  }
+  },
 };

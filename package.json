@@ -1,7 +1,8 @@
 {
   "scripts": {
     "build": "rspack build",
-    "start": "rspack serve"
+    "start": "rspack serve",
+    "build-completions": "node scripts/build-completions.js"
   },
   "devDependencies": {
     "@rspack/cli": "^1.4.11",

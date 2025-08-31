@@ -1,3 +1,5 @@
+import completions from "../completions.json";
+
 class EditorMenu extends HTMLElement {
   constructor() {
     super();
@@ -55,6 +57,15 @@ class EditorMenu extends HTMLElement {
       this.commands = this.getDefaultCommands();
     }
 
+    // Add completions as snippet commands
+    const snippetCommands = completions.map((completion) => ({
+      label: `SNIPPET: ${completion.name}${completion.summary ? ` - ${completion.summary}` : ""}`,
+      action: `snippet-${completion.name}`,
+      category: "Snippets",
+      snippetContent: completion.content,
+    }));
+
+    this.commands = [...this.commands, ...snippetCommands];
     this.filteredCommands = [...this.commands];
   }
 
@@ -110,8 +121,10 @@ class EditorMenu extends HTMLElement {
     this.searchInput.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
-        const firstItem = this.commandList.querySelector("li");
-        if (firstItem) {
+        const firstItem = this.commandList.querySelector(
+          "li:not(.category-header):not(.no-results)",
+        );
+        if (firstItem && firstItem.dataset.action) {
           this.executeCommand(firstItem.dataset.action);
         }
       } else if (e.key === "Escape") {
@@ -224,6 +237,32 @@ class EditorMenu extends HTMLElement {
   }
 
   executeCommand(action) {
+    // Safety check for undefined action
+    if (!action) {
+      console.warn("executeCommand called with undefined action");
+      return;
+    }
+
+    // Check if this is a snippet command
+    if (action.startsWith("snippet-")) {
+      const snippetName = action.replace("snippet-", "");
+      const snippet = completions.find((c) => c.name === snippetName);
+      if (snippet) {
+        this.dispatchEvent(
+          new CustomEvent("menu-item-click", {
+            bubbles: true,
+            composed: true,
+            detail: {
+              action: "insert-snippet",
+              content: snippet.content,
+            },
+          }),
+        );
+        this.closePalette();
+        return;
+      }
+    }
+
     this.dispatchEvent(
       new CustomEvent("menu-item-click", {
         bubbles: true,
