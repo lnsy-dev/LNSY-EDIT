@@ -1,25 +1,33 @@
-const path = require('path');
-const HtmlRspackPlugin = require('html-rspack-plugin');
+const path = require("path");
+const HtmlRspackPlugin = require("html-rspack-plugin");
 
 module.exports = {
   entry: {
-    main: './index.js',
+    main: "./index.js",
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "./"),
+      publicPath: "/",
+    },
+    hot: true,
+    port: 8080,
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
   plugins: [
     new HtmlRspackPlugin({
-      template: './index.html',
+      template: "./index.html",
     }),
   ],
 };
