@@ -89,11 +89,6 @@ class EditorMenu extends HTMLElement {
         shortcut: "Ctrl+S",
         category: "File",
       },
-      {
-        label: "Toggle Autosave",
-        action: "toggle-autosave",
-        category: "File",
-      },
     ];
   }
 

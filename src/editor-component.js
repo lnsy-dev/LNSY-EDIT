@@ -106,7 +106,7 @@ class EditorComponent extends HTMLElement {
 
     const view = new EditorView({
       parent: editorContainer,
-      doc: "",
+      doc: "<!doctype html>",
       extensions: [
         basicSetup,
         html(),
