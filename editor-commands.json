@@ -1,0 +1,180 @@
+{
+  "commands": [
+    {
+      "label": "New File",
+      "action": "new",
+      "shortcut": "Ctrl+N",
+      "category": "File",
+      "description": "Create a new empty file"
+    },
+    {
+      "label": "Open File",
+      "action": "open",
+      "shortcut": "Ctrl+O",
+      "category": "File",
+      "description": "Open an existing file"
+    },
+    {
+      "label": "Load File",
+      "action": "load",
+      "shortcut": "Ctrl+L",
+      "category": "File",
+      "description": "Load a file from disk"
+    },
+    {
+      "label": "Save",
+      "action": "save",
+      "shortcut": "Ctrl+S",
+      "category": "File",
+      "description": "Save the current file"
+    },
+    {
+      "label": "Save As...",
+      "action": "save-as",
+      "shortcut": "Ctrl+Shift+S",
+      "category": "File",
+      "description": "Save the current file with a new name"
+    },
+    {
+      "label": "Toggle Autosave",
+      "action": "toggle-autosave",
+      "category": "File",
+      "description": "Enable or disable automatic saving"
+    },
+    {
+      "label": "Close File",
+      "action": "close",
+      "shortcut": "Ctrl+W",
+      "category": "File",
+      "description": "Close the current file"
+    },
+    {
+      "label": "Undo",
+      "action": "undo",
+      "shortcut": "Ctrl+Z",
+      "category": "Edit",
+      "description": "Undo the last action"
+    },
+    {
+      "label": "Redo",
+      "action": "redo",
+      "shortcut": "Ctrl+Y",
+      "category": "Edit",
+      "description": "Redo the last undone action"
+    },
+    {
+      "label": "Cut",
+      "action": "cut",
+      "shortcut": "Ctrl+X",
+      "category": "Edit",
+      "description": "Cut selected text to clipboard"
+    },
+    {
+      "label": "Copy",
+      "action": "copy",
+      "shortcut": "Ctrl+C",
+      "category": "Edit",
+      "description": "Copy selected text to clipboard"
+    },
+    {
+      "label": "Paste",
+      "action": "paste",
+      "shortcut": "Ctrl+V",
+      "category": "Edit",
+      "description": "Paste text from clipboard"
+    },
+    {
+      "label": "Select All",
+      "action": "select-all",
+      "shortcut": "Ctrl+A",
+      "category": "Edit",
+      "description": "Select all text in the editor"
+    },
+    {
+      "label": "Find",
+      "action": "find",
+      "shortcut": "Ctrl+F",
+      "category": "Edit",
+      "description": "Find text in the current file"
+    },
+    {
+      "label": "Replace",
+      "action": "replace",
+      "shortcut": "Ctrl+H",
+      "category": "Edit",
+      "description": "Find and replace text"
+    },
+    {
+      "label": "Toggle Word Wrap",
+      "action": "toggle-wrap",
+      "category": "View",
+      "description": "Enable or disable word wrapping"
+    },
+    {
+      "label": "Toggle Line Numbers",
+      "action": "toggle-line-numbers",
+      "category": "View",
+      "description": "Show or hide line numbers"
+    },
+    {
+      "label": "Increase Font Size",
+      "action": "font-increase",
+      "shortcut": "Ctrl+Plus",
+      "category": "View",
+      "description": "Make the text larger"
+    },
+    {
+      "label": "Decrease Font Size",
+      "action": "font-decrease",
+      "shortcut": "Ctrl+Minus",
+      "category": "View",
+      "description": "Make the text smaller"
+    },
+    {
+      "label": "Reset Font Size",
+      "action": "font-reset",
+      "shortcut": "Ctrl+0",
+      "category": "View",
+      "description": "Reset font size to default"
+    },
+    {
+      "label": "Toggle Dark Mode",
+      "action": "toggle-theme",
+      "category": "View",
+      "description": "Switch between light and dark themes"
+    },
+    {
+      "label": "Settings",
+      "action": "settings",
+      "shortcut": "Ctrl+Comma",
+      "category": "Preferences",
+      "description": "Open editor settings"
+    },
+    {
+      "label": "Keyboard Shortcuts",
+      "action": "shortcuts",
+      "shortcut": "Ctrl+K Ctrl+S",
+      "category": "Preferences",
+      "description": "View and edit keyboard shortcuts"
+    },
+    {
+      "label": "About",
+      "action": "about",
+      "category": "Help",
+      "description": "About LNSY Editor"
+    },
+    {
+      "label": "Documentation",
+      "action": "documentation",
+      "shortcut": "F1",
+      "category": "Help",
+      "description": "Open documentation"
+    },
+    {
+      "label": "Report Issue",
+      "action": "report-issue",
+      "category": "Help",
+      "description": "Report a bug or request a feature"
+    }
+  ]
+}
