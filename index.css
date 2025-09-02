@@ -76,3 +76,45 @@ preview-component {
     height: 100%;
     width: 100%;
 }
+
+/* Custom scrollbar styles */
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--neutral-dark);
+    border-radius: 0;
+    border: 1px solid var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neutral);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: var(--neutral-light);
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--bg-color);
+}
+
+/* Firefox scrollbar styles */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--neutral-dark) var(--bg-color);
+}
+
+/* For elements with custom scrollbars */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--neutral-dark) var(--bg-color);
+}

@@ -1,12 +1,27 @@
 [
   {
+    "name": "augmented-reality",
+    "content": "<!doctype html>\n<html>\n  <head>\n    <script src=\"https://aframe.io/releases/1.7.0/aframe.min.js\"></script>\n    <title>Augmented Reality</title>\n  </head>\n  <body>\n    <a-scene>\n      <a-box position=\"-1 0.5 -3\" rotation=\"0 45 0\" color=\"#4CC3D9\"></a-box>\n      <a-sphere position=\"0 1.25 -5\" radius=\"1.25\" color=\"#EF2D5E\"></a-sphere>\n      <a-cylinder position=\"1 0.75 -3\" radius=\"0.5\" height=\"1.5\" color=\"#FFC65D\"></a-cylinder>\n      <a-plane position=\"0 0 -4\" rotation=\"-90 0 0\" width=\"4\" height=\"4\" color=\"#7BC8A4\"></a-plane>\n      <a-sky color=\"#ECECEC\"></a-sky>\n    </a-scene>\n  </body>\n</html>\n",
+    "summary": ""
+  },
+  {
     "name": "basic",
     "content": "<!doctype html>\n<html lang=\"en\"></html>\n",
     "summary": ""
   },
   {
+    "name": "custom-html-element",
+    "content": "class ElementName extends HTMLElement {\n  connectedCallback(){\n  }\n\n  static get observedAttributes() {\n    return [];\n  }\n\n  attributeChangedCallback(name, old_value, new_value){\n    switch(name){\n      default:\n    }\n  }\n\n}\n\ncustomElements.define('element-tag-name', ElementName);",
+    "summary": ""
+  },
+  {
+    "name": "markdown",
+    "content": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Markdown File</title>\n  <script src=\"https://lindseymysse.com/markdown-component/dist/mark-down-component.min.js\" type=\"module\"></script>\n</head>\n<body>\n\n<mark-down>\n# Markdown Component\n\nEdit the text here in markdown\n</mark-down>\n\n</body>\n</html>",
+    "summary": ""
+  },
+  {
     "name": "tutorial",
-    "content": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>This is the title</title>\n  <script type=\"module\">\n    class ElementName extends HTMLElement {\n      connectedCallback(){\n      }\n    \n      static get observedAttributes() {\n        return [];\n      }\n    \n      attributeChangedCallback(name, old_value, new_value){\n        switch(name){\n          default:\n        }\n      }\n    \n    }\n    \n    customElements.define('element-tag-name', ElementName);\n\n  </script>\n</head>\n<body>\n\n<element-tag-name id=\"element_id\"></element-tag-name>\n\n\n<script>\n  \n\n  \n</script>\n\n\n</body>\n</html>",
+    "content": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>This is the title</title>\n  <style>\n    :root {\n      --line-height: 1rem;\n      --font-size: 14px;\n      --bg-color: black;\n      --fg-color: white;\n      --neutral-background: var(--bg-color);\n      --neutral: grey;\n      --neutral-light: lightgrey;\n      --neutral-dark: darkgrey;\n      --neutral-extra-dark: #2d2d2d;\n      --highlight-color: var(--neutral-extra-dark);\n      --error: red;\n      --warning: yellow;\n      --notice: green;\n    }\n\n    body {\n      background-color: var(--bg-color);\n      color: var(--fg-color);\n      font-size: var(--font-size);\n      line-height: var(--line-height);\n    }\n\n    element-tag-name {\n      display: block;\n      width: 100%;\n      height: 100%;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      flex-direction: column;\n    }\n\n    \n  </style>\n\n  <script type=\"module\">\n    class ElementName extends HTMLElement {\n      connectedCallback(){\n      }\n\n      async render(){\n        const content = this.getAttribute(\"content\");\n        this.innerHTML = `This component is working: ${content}`\n      }\n    \n      static get observedAttributes() {\n        return ['content'];\n      }\n    \n      attributeChangedCallback(name, old_value, new_value){\n        if(old_value !== new_value){\n          this.render()\n        }\n      }\n    \n    }\n    \n    customElements.define('tutorial-tag', ElementName);\n\n  </script>\n</head>\n<body>\n\n<tutorial-tag id=\"element_id\" content=\"initialized\"></tutorial-tag>\n\n<script>\n  setInterval(()=>{\n    console.log(\"Updating...\")\n    element_id.setAttribute(\"content\", Math.random())\n  }, 3000)\n</script>\n\n\n</body>\n</html>\n\n",
     "summary": ""
   }
 ]

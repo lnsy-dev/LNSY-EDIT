@@ -31,7 +31,7 @@ class PreviewComponent extends HTMLElement {
     // Title
     const title = document.createElement("h2");
     title.className = "preview-consent-title";
-    title.textContent = "Live Preview Security Warning";
+    title.textContent = "Read the Code First";
 
     // Main warning message
     const mainMessage = document.createElement("p");

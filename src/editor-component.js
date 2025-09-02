@@ -3,7 +3,7 @@ import { html } from "@codemirror/lang-html";
 import { keymap } from "@codemirror/view";
 import { linter, lintGutter } from "@codemirror/lint";
 import { HTMLHint } from "htmlhint";
-import { completionKeymap } from "./completions.js";
+import { completionKeymap, completionExtension } from "./completions.js";
 import "./editor-menu.js";
 import "./editor-footer.js";
 import { EditorTheme, SyntaxHighlightingTheme } from "./theme.js";
@@ -139,6 +139,7 @@ class EditorComponent extends HTMLElement {
         linter(htmlLinter),
         lintGutter(),
         keymap.of([completionKeymap]),
+        completionExtension,
         EditorTheme,
         SyntaxHighlightingTheme,
         EditorView.updateListener.of((update) => {
@@ -209,9 +210,8 @@ class EditorComponent extends HTMLElement {
 
         // Store the content to load after the view is initialized
         this.initialContent = decodedContent;
-        const noHashURL = window.location.href.replace(/#.*$/, '');
-        window.history.replaceState('', document.title, noHashURL) 
-
+        const noHashURL = window.location.href.replace(/#.*$/, "");
+        window.history.replaceState("", document.title, noHashURL);
       } catch (error) {
         console.error("Failed to decode content from URL:", error);
       }
