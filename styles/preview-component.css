@@ -1,11 +1,178 @@
 preview-component {
-  display: block;
-  height: 100%;
-  width: 100%;
+    display: block;
+    height: 100%;
+    width: 100%;
+    color: black;
 }
 
 preview-component iframe {
-  height: 100%;
-  width: 100%;
-  border: none;
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+/* Consent warning container */
+.preview-consent-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 40px;
+}
+
+/* Warning icon */
+.preview-warning-icon {
+    font-size: 72px;
+    margin-bottom: 24px;
+    animation: pulse 2s infinite;
+}
+
+/* Title */
+.preview-consent-title {
+    margin: 0 0 16px 0;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* Main message */
+.preview-main-message {
+    margin: 0 0 24px 0;
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 500px;
+    text-align: center;
+    opacity: 0.95;
+}
+
+/* Security risks box */
+.preview-risks-box {
+    border-radius: 8px;
+    padding: 20px;
+    margin: 0 0 32px 0;
+    max-width: 500px;
+}
+
+.preview-risks-title {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.preview-risks-list {
+    margin: 0;
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+/* Important notice */
+.preview-important-notice {
+    margin: 0 0 32px 0;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Buttons container */
+.preview-buttons-container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Enable Preview button */
+.preview-enable-button {
+    padding: 12px 24px;
+    background: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.preview-enable-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Keep Disabled button */
+.preview-disable-button {
+    padding: 12px 24px;
+    border: 2px solid white;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.preview-disable-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Disabled state container */
+.preview-disabled-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 40px;
+    background: #f8f9fa;
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.preview-disabled-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    opacity: 0.3;
+}
+
+.preview-disabled-title {
+    margin: 0 0 12px 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.preview-disabled-message {
+    margin: 0 0 24px 0;
+    font-size: 16px;
+    text-align: center;
+    max-width: 400px;
+    line-height: 1.5;
+}
+
+.preview-enable-small-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.preview-enable-small-button:hover {
+}
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }

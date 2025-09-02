@@ -76,18 +76,42 @@ class EditorMenu extends HTMLElement {
         action: "new",
         shortcut: "Ctrl+N",
         category: "File",
+        description: "Create a new empty file",
       },
       {
-        label: "Load File",
-        action: "load",
+        label: "Open File",
+        action: "open",
         shortcut: "Ctrl+O",
         category: "File",
+        description: "Open an existing file",
       },
       {
-        label: "Save File",
+        label: "Save",
         action: "save",
         shortcut: "Ctrl+S",
         category: "File",
+        description: "Save the current file",
+      },
+      {
+        label: "Save As...",
+        action: "save-as",
+        shortcut: "Ctrl+Shift+S",
+        category: "File",
+        description: "Save the current file with a new name",
+      },
+      {
+        label: "Save As URL",
+        action: "save-as-url",
+        shortcut: "Ctrl+U",
+        category: "File",
+        description:
+          "Generate a shareable URL with the current content encoded",
+      },
+      {
+        label: "Toggle Fullscreen",
+        action: "toggle-fullscreen",
+        category: "View",
+        description: "Toggle fullscreen mode",
       },
     ];
   }
@@ -99,11 +123,40 @@ class EditorMenu extends HTMLElement {
       this.openPalette();
     });
 
-    // Keyboard shortcut (Ctrl+Shift+P)
+    // Register keyboard shortcuts for all commands
     document.addEventListener("keydown", (e) => {
+      // Command palette shortcut (Ctrl+Shift+P)
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === "P") {
         e.preventDefault();
         this.openPalette();
+        return;
+      }
+
+      // Check for command shortcuts
+      const ctrl = e.ctrlKey || e.metaKey;
+      const shift = e.shiftKey;
+      const alt = e.altKey;
+
+      for (const command of this.commands) {
+        if (command.shortcut) {
+          const shortcutParts = command.shortcut.toLowerCase().split("+");
+          const hasCtrl =
+            shortcutParts.includes("ctrl") || shortcutParts.includes("cmd");
+          const hasShift = shortcutParts.includes("shift");
+          const hasAlt = shortcutParts.includes("alt");
+          const key = shortcutParts[shortcutParts.length - 1];
+
+          if (
+            hasCtrl === ctrl &&
+            hasShift === shift &&
+            hasAlt === alt &&
+            e.key.toLowerCase() === key.toLowerCase()
+          ) {
+            e.preventDefault();
+            this.executeCommand(command.action);
+            break;
+          }
+        }
       }
     });
 

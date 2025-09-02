@@ -1,33 +1,45 @@
 {
-    "commands":
-    [
-        {
-            "label": "New File",
-            "action": "new",
-            "shortcut": "Ctrl+N",
-            "category": "File",
-            "description": "Create a new empty file"
-        },
-        {
-            "label": "Open File",
-            "action": "open",
-            "shortcut": "Ctrl+O",
-            "category": "File",
-            "description": "Open an existing file"
-        },
-        {
-            "label": "Save",
-            "action": "save",
-            "shortcut": "Ctrl+S",
-            "category": "File",
-            "description": "Save the current file"
-        },
-        {
-            "label": "Save As...",
-            "action": "save-as",
-            "shortcut": "Ctrl+Shift+S",
-            "category": "File",
-            "description": "Save the current file with a new name"
-        }
-    ]
+  "commands": [
+    {
+      "label": "New File",
+      "action": "new",
+      "shortcut": "Ctrl+N",
+      "category": "File",
+      "description": "Create a new empty file"
+    },
+    {
+      "label": "Open File",
+      "action": "open",
+      "shortcut": "Ctrl+O",
+      "category": "File",
+      "description": "Open an existing file"
+    },
+    {
+      "label": "Save",
+      "action": "save",
+      "shortcut": "Ctrl+S",
+      "category": "File",
+      "description": "Save the current file"
+    },
+    {
+      "label": "Save As...",
+      "action": "save-as",
+      "shortcut": "Ctrl+Shift+S",
+      "category": "File",
+      "description": "Save the current file with a new name"
+    },
+    {
+      "label": "Save As URL",
+      "action": "save-as-url",
+      "shortcut": "Ctrl+U",
+      "category": "File",
+      "description": "Generate a shareable URL with the current content encoded"
+    },
+    {
+      "label": "Toggle Fullscreen",
+      "action": "toggle-fullscreen",
+      "category": "View",
+      "description": "Toggle fullscreen mode"
+    }
+  ]
 }
