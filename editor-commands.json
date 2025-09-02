@@ -22,13 +22,6 @@
       "description": "Save the current file"
     },
     {
-      "label": "Save As...",
-      "action": "save-as",
-      "shortcut": "Ctrl+Shift+S",
-      "category": "File",
-      "description": "Save the current file with a new name"
-    },
-    {
       "label": "Save As URL",
       "action": "save-as-url",
       "shortcut": "Ctrl+U",
